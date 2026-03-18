@@ -105,7 +105,7 @@
         85% 30%,
         50% 0%
       );
-      background: #3D7A5A;
+      background: #2D8B5E;
       overflow: hidden;
     }
 
@@ -119,14 +119,14 @@
       background:
         linear-gradient(
           to bottom,
-          #3D7A5A 42%,
-          #8B3A2A 42%,
-          #8B3A2A 50%,
-          #C45C26 50%,
-          #C45C26 58%,
-          #D4A017 58%,
-          #D4A017 66%,
-          #3D7A5A 66%
+          #2D8B5E 42%,
+          #E63946 42%,
+          #E63946 50%,
+          #FF6B35 50%,
+          #FF6B35 58%,
+          #FFD166 58%,
+          #FFD166 66%,
+          #2D8B5E 66%
         );
     }
 
@@ -139,6 +139,56 @@
       height: 18px;
       background: #5C4033;
       border-radius: 0 0 3px 3px;
+    }
+
+    /* Fire embers */
+    .ember-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .ember-particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: emberFloat linear infinite;
+    }
+
+    .ember-particle:nth-child(1) { width: 3px; height: 3px; background: #FF6B35; left: 25%; bottom: 20%; animation-duration: 2.5s; animation-delay: 0s; }
+    .ember-particle:nth-child(2) { width: 4px; height: 4px; background: #FFD166; left: 60%; bottom: 15%; animation-duration: 3s; animation-delay: 0.5s; }
+    .ember-particle:nth-child(3) { width: 2px; height: 2px; background: #FFE066; left: 40%; bottom: 25%; animation-duration: 2.8s; animation-delay: 1s; }
+    .ember-particle:nth-child(4) { width: 3px; height: 3px; background: #FF6B35; left: 70%; bottom: 18%; animation-duration: 3.2s; animation-delay: 1.5s; }
+    .ember-particle:nth-child(5) { width: 2px; height: 2px; background: #FFD166; left: 35%; bottom: 22%; animation-duration: 2.6s; animation-delay: 0.8s; }
+    .ember-particle:nth-child(6) { width: 3px; height: 3px; background: #FFE066; left: 55%; bottom: 12%; animation-duration: 3.5s; animation-delay: 2s; }
+
+    @keyframes emberFloat {
+      0% { opacity: 0; transform: translateY(0) translateX(0); }
+      10% { opacity: 0.9; }
+      50% { opacity: 0.6; transform: translateY(-60px) translateX(8px); }
+      80% { opacity: 0.2; }
+      100% { opacity: 0; transform: translateY(-120px) translateX(-5px); }
+    }
+
+    /* Glow at top of tree */
+    .tree-glow {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 40px;
+      background: radial-gradient(ellipse, rgba(255,107,53,0.3) 0%, transparent 70%);
+      animation: glowPulse 2s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) scaleY(1); }
+      50% { opacity: 0.8; transform: translateX(-50%) scaleY(1.2); }
     }
 
     /* Brand text */
@@ -236,25 +286,63 @@
     .contact-heading {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(36px, 5vw, 56px);
-      color: #C45C26;
+      color: #FF6B35;
       letter-spacing: 0.05em;
       margin-bottom: 32px;
     }
 
-    .contact-email {
-      display: inline-block;
-      font-family: 'Inter', sans-serif;
-      font-size: 18px;
-      color: #F4F3F1;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(244, 243, 241, 0.2);
-      padding-bottom: 4px;
-      transition: border-color 0.3s ease, color 0.3s ease;
+    .contact-form {
+      max-width: 440px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .contact-email:hover {
+    .contact-form input,
+    .contact-form textarea {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      padding: 14px 18px;
+      background: rgba(244, 243, 241, 0.06);
+      border: 1px solid rgba(244, 243, 241, 0.12);
+      border-radius: 8px;
+      color: #F4F3F1;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(244, 243, 241, 0.3);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
       border-color: #C45C26;
-      color: #C45C26;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .contact-form button {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.1em;
+      padding: 14px 32px;
+      background: #F4F3F1;
+      color: #1C1C1C;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background: #FF6B35;
+      color: #F4F3F1;
     }
 
     .contact-location {
@@ -334,44 +422,32 @@
         <div class="string-line"></div>
       </div>
       <div class="tree-container">
+        <div class="tree-glow"></div>
         <div class="tree-shape"></div>
+        <div class="ember-container">
+          <div class="ember-particle"></div>
+          <div class="ember-particle"></div>
+          <div class="ember-particle"></div>
+          <div class="ember-particle"></div>
+          <div class="ember-particle"></div>
+          <div class="ember-particle"></div>
+        </div>
       </div>
       <div class="brand-name">WLDFR</div>
       <div class="brand-location">New York</div>
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section class="about">
-    <div class="about-inner">
-      <div class="about-headline">
-        DIGITAL<br>
-        AMPLIFICATION<span class="accent">.</span>
-      </div>
-      <p class="about-body">
-        We build digital ecosystems that turn cultural relevance into measurable demand. Content strategy, sound seeding, city-level targeting, and real-time campaign intelligence.
-      </p>
-    </div>
-    <div class="stats-row">
-      <div class="stat-item">
-        <span class="stat-label">Content</span>
-        <span class="stat-desc">Daily short-form production across all platforms</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">Sound</span>
-        <span class="stat-desc">Catalog activation and organic audio seeding</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">Targeting</span>
-        <span class="stat-desc">City-level content deployment and geo-fencing</span>
-      </div>
-    </div>
-  </section>
-
   <!-- CONTACT -->
   <section class="contact">
     <div class="contact-heading">START A PROJECT</div>
-    <a href="mailto:sean@wldfr.co" class="contact-email">sean@wldfr.co</a>
+    <form class="contact-form" action="https://formspree.io/f/sean@defaria.nyc" method="POST">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="project" placeholder="Project Name">
+      <textarea name="message" placeholder="Tell us about your project" rows="4"></textarea>
+      <button type="submit">Get Started</button>
+    </form>
     <div class="contact-location">New York</div>
   </section>
 
