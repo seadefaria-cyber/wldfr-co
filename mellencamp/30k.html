@@ -1042,18 +1042,9 @@
   }
   .present-btn:hover { background: rgba(255,255,255,0.25); color: #fff; }
   body.presenting .present-btn { display: none; }
-  body.presenting .page { display: none !important; margin: 0; border-radius: 0; width: 100vw; height: 100vh; padding: 60px 96px; }
-  body.presenting .page.active-slide { display: flex !important; justify-content: center; align-items: stretch; }
-  body.presenting .split-left,
-  body.presenting .split-right,
-  body.presenting .phase-left,
-  body.presenting .budget-item,
-  body.presenting .budget-total,
-  body.presenting .contact-block,
-  body.presenting .card,
-  body.presenting .phase-card { text-align: left; }
-  body.presenting .phase-slide,
-  body.presenting .split { justify-content: center; }
+  body.presenting { overflow: hidden; background: #000; }
+  body.presenting .page { display: none !important; position: fixed; top: 50%; left: 50%; width: 11in; height: 8.5in; margin: 0; border-radius: 0; transform-origin: center center; }
+  body.presenting .page.active-slide { display: flex !important; }
   .slide-counter {
     display: none; position: fixed; bottom: 24px; right: 32px; z-index: 9999;
     font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.3);
@@ -1078,12 +1069,26 @@
     counter.textContent = (currentSlide + 1) + ' / ' + pages.length;
   }
 
+  function scaleSlides() {
+    var scaleX = window.innerWidth / 1056;
+    var scaleY = window.innerHeight / 816;
+    var s = Math.min(scaleX, scaleY);
+    pages.forEach(function(p) {
+      p.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+    });
+  }
+
   window.startPresentation = function() {
     pages = Array.from(document.querySelectorAll('.page'));
     document.body.classList.add('presenting');
     document.documentElement.requestFullscreen().catch(function(){});
+    scaleSlides();
     showSlide(0);
   };
+
+  window.addEventListener('resize', function() {
+    if (document.body.classList.contains('presenting')) scaleSlides();
+  });
 
   document.addEventListener('keydown', function(e) {
     if (!document.body.classList.contains('presenting')) return;
