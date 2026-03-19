@@ -342,11 +342,9 @@
   <div class="page" id="page">
     <div class="heat-layer" id="heatLayer"></div>
 
-    <div class="logo-wrap" id="logo">
+    <div class="logo-wrap" id="logo" onclick="fireRipple(event)">
       <img src="mellencamp/images/wldfr-white.png" alt="WLDFR" class="logo-img">
     </div>
-
-    <button class="cta-text" onclick="fireRipple(event)">START A PROJECT</button>
 
     <footer class="footer">
       <div class="footer-text">WLDFR NYC</div>
@@ -400,7 +398,7 @@
     }
 
     // Apply to logo, CTA button, and footer
-    var hotElements = document.querySelectorAll('.logo-wrap, .cta-text, .footer-text');
+    var hotElements = document.querySelectorAll('.logo-wrap, .footer-text');
     hotElements.forEach(function(el) {
       el.addEventListener('mouseenter', startHeat);
       el.addEventListener('mouseleave', stopHeat);
