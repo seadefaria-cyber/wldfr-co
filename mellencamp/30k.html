@@ -26,18 +26,21 @@
     --warm-stone: #F4F3F1;
   }
 
-  body { font-family: var(--font); background: #000; color: var(--text); -webkit-font-smoothing: antialiased; min-width: 1056px; }
+  html { scroll-snap-type: y mandatory; }
+  body { font-family: var(--font); background: #000; color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; margin: 0; }
 
   .page {
-    width: 11in; height: 8.5in; position: relative; overflow: hidden;
+    width: 100vw; height: 100vh; position: relative; overflow: hidden;
     background: var(--bg); display: flex; flex-direction: column;
-    justify-content: center; margin: 0 auto; page-break-after: always;
-    padding: 72px 96px;
+    justify-content: center; align-items: center; text-align: center;
+    margin: 0; page-break-after: always;
+    padding: 5vh 6vw;
+    scroll-snap-align: start;
   }
   .page.centered { align-items: center; text-align: center; }
   .page:last-child { page-break-after: avoid; }
   .page::before {
-    content: ''; position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px;
+    content: ''; position: absolute; top: 1.2vh; left: 0.8vw; right: 0.8vw; bottom: 1.2vh;
     border: 1px solid rgba(245,197,24,0.15); border-radius: 4px; z-index: 1; pointer-events: none;
   }
 
@@ -51,59 +54,56 @@
   }
   .page > *:not(.page-bg) { position: relative; z-index: 1; }
 
-  @media screen { .page { margin: 24px auto; border-radius: 6px; } }
   @page { size: 11in 8.5in landscape; margin: 0; }
   @media print { body { background: #000; margin: 0; } .page { margin: 0; width: 100vw; height: 100vh; border-radius: 0; } }
 
   .page-logo {
-    position: absolute !important; top: 20px; left: 32px;
-    width: 52px; height: auto; z-index: 10;
-    text-transform: uppercase;
+    display: none;
   }
-  .page-footer { position: absolute !important; bottom: 24px; left: 0; right: 0; font-family: var(--mono); font-size: 7px; font-weight: 400; letter-spacing: 0.15em; color: rgba(255,255,255,0.2); text-align: center; text-transform: uppercase; z-index: 10; }
-  .page-meta { position: absolute !important; top: 36px; right: 48px; text-align: right; z-index: 10; }
-  .page-meta .line1 { font-family: var(--font); font-size: 11px; font-weight: 600; color: var(--text); letter-spacing: 0.08em; text-transform: uppercase; }
-  .page-meta .line2 { font-family: var(--mono); font-size: 9px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
+  .page-footer { position: absolute !important; bottom: 2vh; left: 0; right: 0; font-family: var(--mono); font-size: clamp(6px, 0.7vw, 8px); font-weight: 400; letter-spacing: 0.15em; color: rgba(255,255,255,0.2); text-align: center; text-transform: uppercase; z-index: 10; }
+  .page-meta { position: absolute !important; top: 3.5vh; right: 3vw; text-align: right; z-index: 10; }
+  .page-meta .line1 { font-family: var(--font); font-size: clamp(10px, 1.2vw, 13px); font-weight: 600; color: var(--text); letter-spacing: 0.08em; text-transform: uppercase; }
+  .page-meta .line2 { font-family: var(--mono); font-size: clamp(9px, 1vw, 11px); font-weight: 400; color: var(--text-muted); margin-top: 0.2vh; }
 
-  .hero-title { font-family: var(--font-display); font-size: 108px; font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; }
+  .hero-title { font-family: var(--font-display); font-size: clamp(48px, 8vw, 108px); font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; }
   .hero-title .accent { color: var(--accent); }
 
-  .section-title { font-family: var(--font-display); font-size: 80px; font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 28px; }
+  .section-title { font-family: var(--font-display); font-size: clamp(40px, 6vw, 80px); font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 2vh; }
   .section-title .accent { color: var(--accent); }
 
-  .hero-sub { font-family: var(--font); font-size: 15px; font-weight: 500; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 28px; }
+  .hero-sub { font-family: var(--font); font-size: clamp(12px, 1.5vw, 19px); font-weight: 500; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2vh; }
 
-  .body-text { font-size: 17px; font-weight: 500; color: var(--text-secondary); line-height: 1.8; max-width: 540px; }
+  .body-text { font-size: clamp(14px, 1.6vw, 20px); font-weight: 500; color: var(--text-secondary); line-height: 1.8; max-width: 540px; margin-left: auto; margin-right: auto; }
 
-  .card-grid { display: grid; gap: 16px; width: 100%; margin-top: 20px; }
+  .card-grid { display: grid; gap: clamp(8px, 1.5vh, 16px); width: 100%; margin-top: 1.5vh; margin-left: auto; margin-right: auto; max-width: 700px; }
   .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-  .card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px; text-align: left; }
-  .card-num { font-family: var(--font-display); font-size: 42px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
-  .card h3 { font-family: var(--font); font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-  .card li { font-size: 13.5px; font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 3px; }
-  .card ul { list-style: disc; padding-left: 16px; margin-top: 6px; }
+  .card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: clamp(8px, 1.2vw, 16px); padding: clamp(12px, 2.5vh, 28px); text-align: left; }
+  .card-num { font-family: var(--font-display); font-size: clamp(24px, 4vw, 42px); font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 0.8vh; }
+  .card h3 { font-family: var(--font); font-size: clamp(12px, 1.3vw, 15px); font-weight: 600; color: var(--text); margin-bottom: 0.5vh; }
+  .card li { font-size: clamp(12px, 1.3vw, 15px); font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 0.3vh; }
+  .card ul { list-style: disc; padding-left: 1.2vw; margin-top: 0.5vh; }
 
-  .split { display: flex; align-items: flex-start; gap: 72px; width: 100%; }
-  .split-left { flex-shrink: 0; width: 340px; }
-  .split-right { flex: 1; }
+  .split { display: flex; align-items: center; justify-content: center; gap: 4vw; width: 100%; }
+  .split-left { flex-shrink: 0; width: 30%; text-align: left; }
+  .split-right { flex: 1; text-align: left; }
 
-  .budget-item { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: baseline; }
-  .budget-item .budget-phase { font-family: var(--font); font-size: 14px; font-weight: 600; color: var(--accent); }
-  .budget-item .budget-desc { font-size: 13px; color: #e0e0e0; font-weight: 500; margin-top: 4px; }
-  .budget-item .budget-amount { font-family: var(--font); font-size: 17px; font-weight: 700; color: var(--text); flex-shrink: 0; margin-left: 24px; }
-  .budget-total { padding-top: 28px; margin-top: 8px; border-top: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: baseline; }
-  .budget-total .label { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--accent); text-transform: uppercase; }
-  .budget-total .amount { font-family: var(--font-display); font-size: 40px; font-weight: 700; color: var(--accent); text-transform: uppercase; }
+  .budget-item { padding: 1vh 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: baseline; text-align: left; }
+  .budget-item .budget-phase { font-family: var(--font); font-size: clamp(12px, 1.3vw, 16px); font-weight: 600; color: var(--accent); }
+  .budget-item .budget-desc { font-size: clamp(11px, 1.1vw, 15px); color: #e0e0e0; font-weight: 500; margin-top: 2px; }
+  .budget-item .budget-amount { font-family: var(--font); font-size: clamp(13px, 1.3vw, 17px); font-weight: 700; color: var(--text); flex-shrink: 0; margin-left: 2vw; }
+  .budget-total { padding-top: 1.5vh; margin-top: 0.5vh; border-top: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: baseline; text-align: left; }
+  .budget-total .label { font-family: var(--font-display); font-size: clamp(18px, 2vw, 24px); font-weight: 700; color: var(--accent); text-transform: uppercase; }
+  .budget-total .amount { font-family: var(--font-display); font-size: clamp(28px, 3vw, 40px); font-weight: 700; color: var(--accent); text-transform: uppercase; }
 
   .contact-block { text-align: left; }
-  .contact-block .contact-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
-  .contact-block .contact-value { font-size: 17px; color: var(--text); font-weight: 400; margin-bottom: 20px; }
+  .contact-block .contact-label { font-family: var(--mono); font-size: clamp(8px, 1vw, 11px); letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4vh; padding-top: 1.5vh; border-top: 1px solid rgba(255,255,255,0.08); }
+  .contact-block .contact-value { font-size: clamp(14px, 1.8vw, 20px); color: var(--text); font-weight: 400; margin-bottom: 1.5vh; }
   .contact-block .contact-value.accent { color: var(--accent); font-weight: 500; }
 
   /* TikTok phone mockup */
   .phone {
-    flex-shrink: 0; width: 210px; height: 420px;
-    background: #000; border-radius: 30px;
+    flex-shrink: 0; width: clamp(140px, 14vw, 210px); height: clamp(280px, 28vw, 420px);
+    background: #000; border-radius: clamp(16px, 2vw, 30px);
     border: 2px solid #333; position: relative;
     overflow: hidden; box-shadow: 0 16px 56px rgba(0,0,0,0.9);
   }
@@ -151,7 +151,7 @@
     align-items: center; justify-content: center; padding: 0 3px;
   }
 
-  .card-week { font-family: var(--mono); font-size: 9px; font-weight: 400; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+  .card-week { font-family: var(--mono); font-size: clamp(9px, 1.1vw, 12px); font-weight: 400; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.4vh; }
 
   /* Geo-fence animations */
   @keyframes geoPulse {
@@ -165,9 +165,9 @@
 
   /* Objective slide mono label */
   .obj-label {
-    font-family: var(--font-display); font-size: 48px; font-weight: 700;
+    font-family: var(--font-display); font-size: clamp(32px, 5vw, 48px); font-weight: 700;
     letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase;
-    margin-bottom: 28px;
+    margin-bottom: 2.5vh;
   }
 
   /* Phone bold caption overlay */
@@ -183,26 +183,26 @@
   }
 
   /* Phase slide layout */
-  .phase-slide { display: flex; align-items: flex-start; gap: 40px; width: 100%; }
-  .phase-left { flex: 1; min-width: 0; max-width: 55%; }
-  .phase-right { flex-shrink: 0; width: 40%; display: flex; align-items: center; justify-content: center; min-height: 340px; }
+  .phase-slide { display: flex; align-items: center; justify-content: center; gap: 3vw; width: 100%; max-width: 90%; margin: 0 auto; }
+  .phase-left { flex: 1; min-width: 0; max-width: 55%; text-align: left; }
+  .phase-right { flex-shrink: 0; width: 35%; display: flex; align-items: center; justify-content: center; }
   .phase-watermark {
-    position: absolute; top: 50%; right: 80px; transform: translateY(-50%);
-    font-family: var(--font-display); font-size: 280px; font-weight: 700;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: var(--font-display); font-size: clamp(120px, 22vw, 280px); font-weight: 700;
     color: var(--accent); opacity: 0.08; line-height: 1; z-index: 0;
     pointer-events: none; user-select: none;
   }
-  .phase-month { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
-  .phase-title { font-family: var(--font-display); font-size: 64px; font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .phase-month { font-family: var(--font-display); font-size: clamp(18px, 2.2vw, 28px); font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5vh; }
+  .phase-title { font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px); font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1.5vh; }
   .phase-title .accent { color: var(--accent); }
-  .phase-card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; }
+  .phase-card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 1.5vh 1.5vw; text-align: left; }
   .phase-card ul { list-style: disc; padding-left: 16px; margin: 0; }
-  .phase-card li { font-size: 12.5px; font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 8px; }
+  .phase-card li { font-size: clamp(11px, 1.2vw, 15px); font-weight: 500; line-height: 1.5; color: #e8e8e8; margin-bottom: 0.5vh; }
   .phase-card li:last-child { margin-bottom: 0; }
-  .phase-note { font-family: var(--mono); font-size: 9px; color: #999; letter-spacing: 0.06em; text-align: center; margin-top: 16px; }
+  .phase-note { font-family: var(--mono); font-size: clamp(9px, 1vw, 12px); color: #999; letter-spacing: 0.06em; text-align: center; margin-top: 1vh; }
 
   /* Month 1: Archive grid animation */
-  .archive-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 200px; }
+  .archive-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(3px, 0.5vw, 6px); width: clamp(140px, 15vw, 200px); }
   .archive-tile {
     width: 100%; aspect-ratio: 1; border: 1px solid rgba(245,197,24,0.3);
     background: rgba(245,197,24,0.06); border-radius: 3px;
@@ -233,7 +233,7 @@
   }
 
   /* Month 2: Ignition shockwave */
-  .ignition-wrap { position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; }
+  .ignition-wrap { position: relative; width: clamp(160px, 18vw, 240px); height: clamp(160px, 18vw, 240px); display: flex; align-items: center; justify-content: center; }
   .ignition-core {
     width: 16px; height: 16px; border-radius: 50%;
     background: var(--accent);
@@ -280,7 +280,7 @@
   }
 
   /* Month 3: Radar sweep */
-  .radar-wrap { position: relative; width: 220px; height: 220px; }
+  .radar-wrap { position: relative; width: clamp(150px, 16vw, 220px); height: clamp(150px, 16vw, 220px); }
   .radar-circle {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     border-radius: 50%; border: 1px solid rgba(245,197,24,0.15);
@@ -327,7 +327,7 @@
   .radar-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(245,197,24,0.5); }
 
   /* Month 4: EKG pulse line */
-  .ekg-wrap { position: relative; width: 260px; height: 120px; overflow: hidden; }
+  .ekg-wrap { position: relative; width: clamp(180px, 18vw, 260px); height: clamp(80px, 10vh, 120px); overflow: hidden; }
   .ekg-line {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   }
@@ -358,10 +358,10 @@
     45% { left: 45%; top: 50%; }
     100% { left: 100%; top: 50%; }
   }
-  .ekg-label { font-family: var(--mono); font-size: 8px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 12px; text-align: center; opacity: 0.6; }
+  .ekg-label { font-family: var(--mono); font-size: clamp(6px, 0.8vw, 8px); color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1vh; text-align: center; opacity: 0.6; }
 
   /* Month 4: Tour route map */
-  .tour-route { position: relative; width: 260px; height: 220px; }
+  .tour-route { position: relative; width: clamp(180px, 18vw, 260px); height: clamp(150px, 18vh, 220px); }
   .tour-route svg polyline { stroke-dasharray: 500; stroke-dashoffset: 500; animation: tourLineDraw 6s ease-in-out infinite; }
   @keyframes tourLineDraw { 0% { stroke-dashoffset: 500; } 30%, 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 500; } }
   .tour-dot {
@@ -403,7 +403,7 @@
   </div>
 
   <div class="hero-title">Digital<br>Amplification</div>
-  <div class="hero-title" style="font-size: 96px;"><span class="accent v2-shine">V2</span></div>
+  <div class="hero-title" style="font-size: clamp(48px, 8vw, 96px);"><span class="accent v2-shine">V2</span></div>
   <div class="hero-sub">John Mellencamp 2026 Tour</div>
 
   <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 1 / 13</div>
@@ -416,7 +416,7 @@
 
 
   <div class="obj-label">Objective</div>
-  <p class="body-text" style="max-width: 620px; text-align: center; font-size: 18px; line-height: 1.85;">Drive a sustained surge in cultural relevance and tour demand for John Mellencamp by strategically amplifying digital content, maximizing reach, engagement, and share of internet attention across platforms in the lead-up to the tour.</p>
+  <p class="body-text" style="max-width: 620px; text-align: center; font-size: clamp(14px, 1.6vw, 20px); line-height: 1.85;">Drive a sustained surge in cultural relevance and tour demand for John Mellencamp by strategically amplifying digital content, maximizing reach, engagement, and share of internet attention across platforms in the lead-up to the tour.</p>
 
   <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 2 / 13</div>
 </div>
@@ -427,15 +427,15 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-4.jpg');"></div>
 
 
-  <div style="display: flex; align-items: flex-start; gap: 32px; width: 100%;">
+  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 2vw; width: 100%;">
     <!-- Left: Title + description -->
-    <div style="flex: 1; min-width: 260px;">
-      <div class="section-title" style="font-size: 72px; color: #ffffff;">Clipping<span class="accent">.</span></div>
-      <p class="body-text" style="max-width: 380px; font-size: 14px; line-height: 1.7;">We source and repackage archival and contemporary footage, spanning performances, interviews, and behind-the-scenes moments, into high-performing short-form content optimized for TikTok, Instagram Reels, and YouTube Shorts. Our team manages a consistent daily publishing cadence across a network of strategically developed fan-facing channels to expand reach and drive sustained audience engagement.</p>
+    <div style="flex: 1; min-width: 20vw; text-align: left;">
+      <div class="section-title" style="font-size: clamp(36px, 5.5vw, 72px); color: #ffffff;">Clipping<span class="accent">.</span></div>
+      <p class="body-text" style="max-width: 380px; font-size: clamp(12px, 1.3vw, 17px); line-height: 1.6;">We source and repackage archival and contemporary footage, spanning performances, interviews, and behind-the-scenes moments, into high-performing short-form content optimized for TikTok, Instagram Reels, and YouTube Shorts. Our team manages a consistent daily publishing cadence across a network of strategically developed fan-facing channels to expand reach and drive sustained audience engagement.</p>
     </div>
 
     <!-- Center: TikTok phone mockup -->
-    <div class="phone" style="width: 180px; height: 360px;">
+    <div class="phone" style="width: clamp(130px, 13vw, 180px); height: clamp(260px, 26vw, 360px);">
       <div class="phone-island"></div>
       <div class="phone-video-wrap">
         <div class="phone-video" style="background-image: url('images/mellencamp-4.jpg');"></div>
@@ -507,29 +507,29 @@
     </div>
 
     <!-- Right: Fan page profile mockup -->
-    <div style="flex-shrink: 0; width: 190px; background: #000; border-radius: 18px; padding: 14px; border: 2px solid #222; box-shadow: 0 12px 48px rgba(0,0,0,0.8);">
-      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #1a1a1a;">
-        <div style="width: 30px; height: 30px; border-radius: 50%; background: url('images/mellencamp-1.jpg') center/cover; flex-shrink: 0;"></div>
+    <div style="flex-shrink: 0; width: clamp(130px, 13vw, 190px); background: #000; border-radius: clamp(10px, 1.2vw, 18px); padding: clamp(8px, 1vw, 14px); border: 2px solid #222; box-shadow: 0 12px 48px rgba(0,0,0,0.8);">
+      <div style="display: flex; align-items: center; gap: 0.5vw; margin-bottom: 1.2vh; padding-bottom: 0.8vh; border-bottom: 1px solid #1a1a1a;">
+        <div style="width: clamp(20px, 2.2vw, 30px); height: clamp(20px, 2.2vw, 30px); border-radius: 50%; background: url('images/mellencamp-1.jpg') center/cover; flex-shrink: 0;"></div>
         <div>
-          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff;">mellencamp.archive</div>
-          <div style="font-family: var(--font); font-size: 7px; color: #666; margin-top: 1px;">Fan Page &middot; Est. 2026</div>
+          <div style="font-family: var(--font); font-size: clamp(7px, 0.8vw, 9px); font-weight: 700; color: #fff;">mellencamp.archive</div>
+          <div style="font-family: var(--font); font-size: clamp(5px, 0.6vw, 7px); color: #666; margin-top: 1px;">Fan Page &middot; Est. 2026</div>
         </div>
       </div>
-      <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 12px;">
+      <div style="display: flex; justify-content: space-around; text-align: center; margin-bottom: 1vh;">
         <div>
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">127</div>
-          <div style="font-family: var(--font); font-size: 6px; color: #666;">Posts</div>
+          <div style="font-family: var(--font); font-size: clamp(8px, 0.9vw, 11px); font-weight: 700; color: #fff;">127</div>
+          <div style="font-family: var(--font); font-size: clamp(5px, 0.5vw, 6px); color: #666;">Posts</div>
         </div>
         <div>
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">48.2K</div>
-          <div style="font-family: var(--font); font-size: 6px; color: #666;">Followers</div>
+          <div style="font-family: var(--font); font-size: clamp(8px, 0.9vw, 11px); font-weight: 700; color: #fff;">48.2K</div>
+          <div style="font-family: var(--font); font-size: clamp(5px, 0.5vw, 6px); color: #666;">Followers</div>
         </div>
         <div>
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff;">2.1M</div>
-          <div style="font-family: var(--font); font-size: 6px; color: #666;">Likes</div>
+          <div style="font-family: var(--font); font-size: clamp(8px, 0.9vw, 11px); font-weight: 700; color: #fff;">2.1M</div>
+          <div style="font-family: var(--font); font-size: clamp(5px, 0.5vw, 6px); color: #666;">Likes</div>
         </div>
       </div>
-      <div style="font-family: var(--font); font-size: 7px; color: #aaa; line-height: 1.4; margin-bottom: 12px;">The archive John Mellencamp deserves.</div>
+      <div style="font-family: var(--font); font-size: clamp(5px, 0.6vw, 7px); color: #aaa; line-height: 1.4; margin-bottom: 1vh;">The archive John Mellencamp deserves.</div>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-radius: 4px; overflow: hidden;">
         <div style="aspect-ratio: 1; background: url('images/mellencamp-4.jpg') center/cover; position: relative;">
           <div style="position: absolute; bottom: 2px; left: 3px; font-family: var(--font); font-size: 6px; font-weight: 600; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">&#9654; 2.4M</div>
@@ -562,14 +562,14 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-7.jpg');"></div>
 
 
-  <div style="display: flex; align-items: flex-start; gap: 56px; width: 100%;">
-    <div style="flex: 1;">
-      <div class="section-title" style="font-size: 64px;">Sound<br><span class="accent">Strategy.</span></div>
-      <p class="body-text" style="max-width: 420px; font-size: 14px; line-height: 1.7;">We activate John Mellencamp's catalog natively within TikTok, leveraging a proven resurgence model to reintroduce key tracks into short-form ecosystems. Through coordinated deployment across a network of fan-facing and seeding accounts, we drive early engagement signals that inform platform distribution. As momentum builds, audio is surfaced within discovery layers, triggering organic propagation and broader creator adoption without reliance on paid amplification.</p>
+  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 3vw; width: 100%;">
+    <div style="flex: 1; text-align: left;">
+      <div class="section-title" style="font-size: clamp(36px, 5vw, 64px);">Sound<br><span class="accent">Strategy.</span></div>
+      <p class="body-text" style="max-width: 420px; font-size: clamp(12px, 1.3vw, 17px); line-height: 1.6;">We activate John Mellencamp's catalog natively within TikTok, leveraging a proven resurgence model to reintroduce key tracks into short-form ecosystems. Through coordinated deployment across a network of fan-facing and seeding accounts, we drive early engagement signals that inform platform distribution. As momentum builds, audio is surfaced within discovery layers, triggering organic propagation and broader creator adoption without reliance on paid amplification.</p>
     </div>
 
     <!-- Generic creator TikTok mockup -->
-    <div class="phone" style="width: 180px; height: 360px; flex-shrink: 0;">
+    <div class="phone" style="width: clamp(130px, 13vw, 180px); height: clamp(260px, 26vw, 360px); flex-shrink: 0;">
       <div class="phone-island"></div>
       <div class="phone-video-wrap">
         <div class="phone-video" style="background-image: url('images/sound-creator.jpg'); background-color: #1a1a1a;"></div>
@@ -649,17 +649,17 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-scarecrow.jpg');"></div>
 
 
-  <div style="display: flex; align-items: flex-start; gap: 48px; width: 100%;">
-    <div style="flex: 1;">
+  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 48px; width: 100%;">
+    <div style="flex: 1; text-align: left;">
       <div class="section-title" style="font-size: 64px;">City<br><span class="accent">Priming.</span></div>
       <div class="card-grid" style="grid-template-columns: 1fr; max-width: 420px;">
         <div class="card">
           <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 10px;">Localized Distribution</h3>
-          <p style="font-size: 14px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">Social platforms distribute content in part through localized signals. By aligning content with city-specific metadata, location tagging, regional hashtags, and engagement with local audiences, we influence how content is surfaced within a given market.</p>
+          <p style="font-size: 17px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">Social platforms distribute content in part through localized signals. By aligning content with city-specific metadata, location tagging, regional hashtags, and engagement with local audiences, we influence how content is surfaced within a given market.</p>
         </div>
         <div class="card">
           <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 10px;">Tour Market Activation</h3>
-          <p style="font-size: 14px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">In the weeks leading up to each tour stop, we deploy a coordinated wave of city-relevant Mellencamp content, localized messaging, past performance moments, and regional nostalgia, driving concentrated visibility and building anticipation within priority markets.</p>
+          <p style="font-size: 17px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">In the weeks leading up to each tour stop, we deploy a coordinated wave of city-relevant Mellencamp content, localized messaging, past performance moments, and regional nostalgia, driving concentrated visibility and building anticipation within priority markets.</p>
         </div>
       </div>
     </div>
@@ -702,7 +702,7 @@
 
   <div class="section-title" style="font-size: 72px; margin-bottom: 48px;">The <span class="accent">Rollout.</span></div>
 
-  <div style="display: flex; align-items: flex-start; width: 80%; max-width: 720px; position: relative;">
+  <div style="display: flex; align-items: flex-start; justify-content: center; width: 80%; max-width: 720px; position: relative;">
     <!-- Horizontal line connecting all dots -->
     <div style="position: absolute; top: 7px; left: 12.5%; right: 12.5%; height: 3px; background: var(--accent);"></div>
 
@@ -759,15 +759,15 @@
           <li>In parallel, establish and activate a network of fan-facing channels across TikTok, Instagram, YouTube, and Facebook to support distribution and scale.</li>
         </ul>
       </div>
-      <div style="margin-top: 14px;">
-        <div style="font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;">Example Narratives</div>
-        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"Just discovered and I'm obsessed"</div>
-          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"This needs a comeback"</div>
-          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"This song STILL holds up"</div>
-          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"80s style was PEAK"</div>
-          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"Stage presence is a lost art"</div>
-          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"Pure aura maestro"</div>
+      <div style="margin-top: 10px;">
+        <div style="font-family: var(--mono); font-size: 7px; font-weight: 500; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px;">Example Narratives</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"Just discovered and I'm obsessed"</div>
+          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"This needs a comeback"</div>
+          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"This song STILL holds up"</div>
+          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"80s style was PEAK"</div>
+          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"Stage presence is a lost art"</div>
+          <div style="font-family: var(--font); font-size: 9px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 4px 10px; white-space: nowrap;">"Pure aura maestro"</div>
         </div>
       </div>
     </div>
@@ -813,20 +813,19 @@
       </div>
     </div>
     <div class="phase-right">
-      <div class="ignition-wrap">
-        <div class="ignition-core"></div>
-        <div class="shockwave"></div>
-        <div class="shockwave"></div>
-        <div class="shockwave"></div>
-        <div class="shockwave"></div>
-        <div class="spark-line"></div>
-        <div class="spark-line"></div>
-        <div class="spark-line"></div>
-        <div class="spark-line"></div>
-        <div class="spark-line"></div>
-        <div class="spark-line"></div>
-        <div class="spark-line"></div>
-        <div class="spark-line"></div>
+      <div class="radar-wrap">
+        <div class="radar-circle outer"></div>
+        <div class="radar-circle mid"></div>
+        <div class="radar-circle inner"></div>
+        <div class="radar-crosshair-h"></div>
+        <div class="radar-crosshair-v"></div>
+        <div class="radar-sweep"></div>
+        <div class="radar-center"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
+        <div class="radar-dot"></div>
       </div>
     </div>
   </div>
@@ -992,7 +991,7 @@
 
   <p class="body-text" style="margin-top: 32px; max-width: 540px; text-align: center;">We start within a week of signing. Content engine runs immediately. City priming activates as tour dates approach. First numbers in 14 days. All content cleared with your team before going live.</p>
 
-  <p style="font-size: 13px; color: var(--text-muted); margin-top: 28px;">Tour starts July 10. That gives us four months to build the machine before it matters most.</p>
+  <p style="font-size: 15px; color: var(--text-muted); margin-top: 28px;">Tour starts July 10. That gives us four months to build the machine before it matters most.</p>
 
   <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 12 / 13</div>
 </div>
@@ -1001,7 +1000,6 @@
 <!-- 13: THANK YOU -->
 <div class="page">
   <div class="page-bg" style="background-image: url('images/mellencamp-5.jpg');"></div>
-  <img class="page-logo" src="images/wldfr-white.png" alt="WLDFR">
 
   <div class="page-meta">
     <div class="line1" style="color: var(--text-muted); text-transform: none;">wldfr.co</div>
@@ -1031,16 +1029,98 @@
 </div>
 
 
-<script>
-document.querySelectorAll('.page').forEach(function(page) {
-  if (!page.querySelector('.page-logo')) {
-    var img = document.createElement('img');
-    img.className = 'page-logo';
-    img.src = 'images/wldfr-white.png';
-    img.alt = 'WLDFR';
-    page.appendChild(img);
+<!-- logos removed -->
+
+<style>
+  .present-btn {
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    background: rgba(255,255,255,0.25); color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(255,255,255,0.4); border-radius: 6px;
+    padding: 8px 18px; font-family: var(--font); font-size: 13px;
+    font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; backdrop-filter: blur(8px);
+    transition: all 0.2s;
   }
-});
+  .present-btn:hover { background: rgba(255,255,255,0.25); color: #fff; }
+  body.presenting .present-btn { display: none; }
+  body.presenting { overflow: hidden; background: #000; }
+  body.presenting .page { display: none !important; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; margin: 0; border-radius: 0; }
+  body.presenting .page.active-slide { display: flex !important; }
+  .slide-counter {
+    display: none; position: fixed; bottom: 24px; right: 32px; z-index: 9999;
+    font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+  }
+  body.presenting .slide-counter { display: block; }
+</style>
+
+<button class="present-btn" onclick="startPresentation()">Present</button>
+<div class="slide-counter" id="slideCounter"></div>
+
+<script>
+(function() {
+  var currentSlide = 0;
+  var pages = [];
+  var counter = document.getElementById('slideCounter');
+
+  function showSlide(n) {
+    pages.forEach(function(p) { p.classList.remove('active-slide'); });
+    currentSlide = Math.max(0, Math.min(n, pages.length - 1));
+    pages[currentSlide].classList.add('active-slide');
+    counter.textContent = (currentSlide + 1) + ' / ' + pages.length;
+  }
+
+  window.startPresentation = function() {
+    pages = Array.from(document.querySelectorAll('.page'));
+    document.body.classList.add('presenting');
+    document.documentElement.requestFullscreen().catch(function(){});
+    showSlide(0);
+  };
+
+  document.addEventListener('keydown', function(e) {
+    if (!document.body.classList.contains('presenting')) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault(); showSlide(currentSlide + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault(); showSlide(currentSlide - 1);
+    } else if (e.key === 'Escape') {
+      document.body.classList.remove('presenting');
+      pages.forEach(function(p) { p.classList.remove('active-slide'); });
+      if (document.fullscreenElement) document.exitFullscreen();
+    }
+  });
+
+  document.addEventListener('fullscreenchange', function() {
+    if (!document.fullscreenElement && document.body.classList.contains('presenting')) {
+      document.body.classList.remove('presenting');
+      pages.forEach(function(p) { p.classList.remove('active-slide'); });
+    }
+  });
+
+  // Mobile: tap left/right halves to navigate
+  document.addEventListener('click', function(e) {
+    if (!document.body.classList.contains('presenting')) return;
+    if (e.target.closest('.present-btn')) return;
+    var x = e.clientX;
+    if (x > window.innerWidth / 2) { showSlide(currentSlide + 1); }
+    else { showSlide(currentSlide - 1); }
+  });
+
+  // Mobile: swipe left/right to navigate
+  var touchStartX = 0;
+  document.addEventListener('touchstart', function(e) {
+    if (!document.body.classList.contains('presenting')) return;
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  document.addEventListener('touchend', function(e) {
+    if (!document.body.classList.contains('presenting')) return;
+    var diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) > 50) {
+      if (diff < 0) showSlide(currentSlide + 1);
+      else showSlide(currentSlide - 1);
+    }
+  });
+})();
 </script>
 </body>
 </html>
