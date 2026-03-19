@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WLDFR — New York</title>
+  <title>Wldfr - New York</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       margin: 0;
@@ -21,8 +21,6 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: #1C1C1C;
-      color: #F4F3F1;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -35,97 +33,97 @@
       align-items: center;
       justify-content: center;
       position: relative;
+      background: #4854E0;
+      transition: background-color 3s ease;
     }
 
-    /* ===== SWINGING ASSEMBLY ===== */
-    .freshener-assembly {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: swing 4s ease-in-out infinite;
-      transform-origin: top center;
+    /* ===== LOGO ===== */
+    .logo-wrap {
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
     }
 
-    @keyframes swing {
-      0%, 100% { transform: rotate(-4deg); }
-      50% { transform: rotate(4deg); }
+    .logo-img {
+      width: 140px;
+      height: auto;
+      display: block;
+      filter: brightness(0);
+      transition: filter 0.6s ease;
     }
 
-    /* String from top */
-    .string-line {
-      width: 1px;
-      height: 80px;
-      background: rgba(244, 243, 241, 0.2);
-    }
-
-    /* ===== THE TREE ===== */
-    .tree-wrap {
-      width: 160px;
-      height: 200px;
-      position: relative;
-    }
-
-    .tree-wrap svg {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
-    }
-
-    /* ===== BRAND TEXT ===== */
-    .brand-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px;
-      letter-spacing: 0.18em;
-      color: #F4F3F1;
-      margin-top: 36px;
-      line-height: 1;
-    }
-
-    .brand-location {
-      font-family: 'Inter', sans-serif;
-      font-style: italic;
-      font-size: 13px;
-      color: rgba(244, 243, 241, 0.4);
-      margin-top: 8px;
-      letter-spacing: 0.06em;
-      font-weight: 300;
+    .page.red-bg .logo-img {
+      filter: brightness(100);
     }
 
     /* ===== CTA BUTTON ===== */
-    .cta-button {
+    .cta-btn {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 16px;
-      letter-spacing: 0.18em;
-      padding: 12px 36px;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      padding: 10px 32px;
       background: transparent;
-      color: #F4F3F1;
-      border: 1px solid rgba(244, 243, 241, 0.3);
-      border-radius: 0;
+      color: #000000;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      border-radius: 4px;
       cursor: pointer;
-      margin-top: 32px;
+      margin-top: 12px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 1s forwards;
       transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
-    .cta-button:hover {
-      background: #C45C26;
-      color: #fff;
-      border-color: #C45C26;
+    .cta-btn:hover {
+      background: #000000;
+      color: #ffffff;
+      border-color: #000000;
+    }
+
+    .page.red-bg .cta-btn {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .page.red-bg .cta-btn:hover {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
     }
 
     /* ===== FOOTER ===== */
     .footer {
       position: absolute;
-      bottom: 20px;
+      bottom: 0;
       left: 0;
       right: 0;
       text-align: center;
+      padding: 14px 0;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.5s forwards;
     }
 
     .footer-text {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
-      color: rgba(244, 243, 241, 0.2);
-      letter-spacing: 0.08em;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: rgba(0, 0, 0, 0.2);
+      transition: color 0.4s ease;
+    }
+
+    .page.red-bg .footer-text {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* ===== MODAL ===== */
@@ -148,8 +146,8 @@
     }
 
     .modal-card {
-      background: #1C1C1C;
-      border: 1px solid rgba(244, 243, 241, 0.1);
+      background: #4854E0;
+      border: 1px solid rgba(0, 0, 0, 0.15);
       border-radius: 12px;
       padding: 40px;
       width: 90%;
@@ -169,8 +167,8 @@
       right: 20px;
       background: none;
       border: none;
-      color: rgba(244, 243, 241, 0.4);
-      font-size: 24px;
+      color: rgba(0, 0, 0, 0.4);
+      font-size: 1.4rem;
       cursor: pointer;
       line-height: 1;
       padding: 4px;
@@ -178,95 +176,90 @@
     }
 
     .modal-close:hover {
-      color: #F4F3F1;
+      color: #000000;
     }
 
     .modal-heading {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px;
-      letter-spacing: 0.1em;
-      color: #F4F3F1;
+      font-size: 1.6rem;
+      letter-spacing: 0.15em;
+      color: #000000;
       margin-bottom: 28px;
     }
 
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    .form-group {
+      margin-bottom: 16px;
     }
 
-    .contact-form input,
-    .contact-form textarea {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      padding: 14px 18px;
-      background: rgba(244, 243, 241, 0.06);
-      border: 1px solid rgba(244, 243, 241, 0.12);
-      border-radius: 8px;
-      color: #F4F3F1;
-      outline: none;
-      transition: border-color 0.3s ease;
+    .form-group label {
+      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.4);
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group textarea {
       width: 100%;
+      padding: 10px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: #000000;
+      background: rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.2s ease;
     }
 
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder {
-      color: rgba(244, 243, 241, 0.3);
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(0, 0, 0, 0.3);
     }
 
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: #C45C26;
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #000000;
     }
 
-    .contact-form textarea {
+    .form-group textarea {
+      height: 90px;
       resize: vertical;
-      min-height: 100px;
     }
 
-    .submit-btn {
+    .form-submit {
+      margin-top: 24px;
+      width: 100%;
+      padding: 12px 0;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
-      letter-spacing: 0.1em;
-      padding: 14px 32px;
-      background: #F4F3F1;
-      color: #1C1C1C;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: #ffffff;
+      background: #000000;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
       transition: background 0.3s ease, color 0.3s ease;
-      margin-top: 4px;
     }
 
-    .submit-btn:hover {
-      background: #C45C26;
-      color: #F4F3F1;
+    .form-submit:hover {
+      background: #ffffff;
+      color: #000000;
     }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .tree-wrap {
-        width: 120px;
-        height: 150px;
+    @media (max-width: 600px) {
+      .logo-img {
+        width: 100px;
       }
 
-      .string-line {
-        height: 50px;
-      }
-
-      .brand-name {
-        font-size: 40px;
-        margin-top: 28px;
-      }
-
-      .brand-location {
+      .cta-btn {
+        padding: 9px 26px;
         font-size: 12px;
-      }
-
-      .cta-button {
-        font-size: 14px;
-        padding: 10px 28px;
-        margin-top: 24px;
       }
 
       .modal-card {
@@ -274,154 +267,78 @@
       }
 
       .modal-heading {
-        font-size: 26px;
+        font-size: 1.3rem;
       }
     }
 
     @media (max-height: 600px) {
-      .string-line {
-        height: 30px;
+      .logo-img {
+        width: 90px;
       }
 
-      .tree-wrap {
-        width: 110px;
-        height: 138px;
-      }
-
-      .brand-name {
-        font-size: 36px;
-        margin-top: 20px;
-      }
-
-      .cta-button {
-        margin-top: 16px;
+      .cta-btn {
+        margin-top: 10px;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="page">
-    <div class="freshener-assembly">
-      <!-- String -->
-      <div class="string-line"></div>
-
-      <!-- Tree -->
-      <div class="tree-wrap">
-        <svg viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <!-- Tree gradient: green base with horizontal stripes -->
-            <linearGradient id="treeGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#3D7A5A"/>
-              <stop offset="30%" stop-color="#3D7A5A"/>
-              <stop offset="33%" stop-color="#8B3A2A"/>
-              <stop offset="40%" stop-color="#8B3A2A"/>
-              <stop offset="42%" stop-color="#3D7A5A"/>
-              <stop offset="46%" stop-color="#3D7A5A"/>
-              <stop offset="48%" stop-color="#C45C26"/>
-              <stop offset="55%" stop-color="#C45C26"/>
-              <stop offset="57%" stop-color="#3D7A5A"/>
-              <stop offset="61%" stop-color="#3D7A5A"/>
-              <stop offset="63%" stop-color="#D4A017"/>
-              <stop offset="70%" stop-color="#D4A017"/>
-              <stop offset="72%" stop-color="#3D7A5A"/>
-              <stop offset="100%" stop-color="#3D7A5A"/>
-            </linearGradient>
-            <!-- Darker outline color -->
-            <linearGradient id="outlineGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#2D5A42"/>
-              <stop offset="100%" stop-color="#2D5A42"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Hanging hole at the very top -->
-          <circle cx="100" cy="12" r="7" fill="none" stroke="#3D7A5A" stroke-width="2.5"/>
-
-          <!-- Classic air freshener pine tree shape:
-               Pointed top, 3 scalloped tiers getting wider, small trunk tab -->
-          <path d="
-            M100 24
-
-            L88 52
-            C84 58, 78 60, 74 56
-            L68 48
-            C64 44, 58 46, 60 52
-
-            L50 72
-            C46 78, 38 80, 34 76
-            L28 66
-            C24 62, 18 64, 20 70
-
-            L10 100
-            C6 108, 4 114, 8 118
-            Q14 126, 28 128
-
-            L60 136
-            L60 140
-            C58 142, 56 144, 56 148
-            L56 168
-            C56 174, 60 178, 66 178
-            L134 178
-            C140 178, 144 174, 144 168
-            L144 148
-            C144 144, 142 142, 140 140
-            L140 136
-
-            L172 128
-            Q186 126, 192 118
-            C196 114, 194 108, 190 100
-
-            L180 70
-            C182 64, 176 62, 172 66
-            L166 76
-            C162 80, 154 78, 150 72
-
-            L140 52
-            C142 46, 136 44, 132 48
-            L126 56
-            C122 60, 116 58, 112 52
-
-            L100 24
-            Z
-          " fill="url(#treeGrad)" stroke="#2D5A42" stroke-width="1"/>
-
-          <!-- Inner texture lines for realism -->
-          <line x1="60" y1="90" x2="140" y2="90" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
-          <line x1="50" y1="110" x2="150" y2="110" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
-        </svg>
-      </div>
+  <div class="page" id="page">
+    <div class="logo-wrap" id="logo">
+      <img src="mellencamp/images/wldfr-white.png" alt="Wildfire" class="logo-img">
     </div>
 
-    <!-- Brand -->
-    <div class="brand-name">WLDFR</div>
-    <div class="brand-location">New York</div>
+    <button class="cta-btn" onclick="openModal()">START A PROJECT</button>
 
-    <!-- CTA -->
-    <button class="cta-button" onclick="openModal()">START A PROJECT</button>
-
-    <!-- Footer -->
     <footer class="footer">
-      <div class="footer-text">&copy; 2026 WLDFR</div>
+      <div class="footer-text">&copy; 2026 Wildfire New York</div>
     </footer>
   </div>
 
-  <!-- Modal Overlay -->
+  <!-- Modal -->
   <div class="modal-overlay" id="modal">
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal()">&times;</button>
       <div class="modal-heading">START A PROJECT</div>
-      <form class="contact-form" action="https://formspree.io/f/sean@defaria.nyc" method="POST">
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="project" placeholder="Project Name">
-        <textarea name="message" placeholder="Tell us about your project" rows="4"></textarea>
-        <button type="submit" class="submit-btn">Get Started</button>
+      <form action="https://formspree.io/f/sean@defaria.nyc" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="project">Project Name</label>
+          <input type="text" id="project" name="project">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message"></textarea>
+        </div>
+        <button type="submit" class="form-submit">GET STARTED</button>
       </form>
     </div>
   </div>
 
   <script>
     var modal = document.getElementById('modal');
+    var page = document.getElementById('page');
+    var logo = document.getElementById('logo');
+
+    logo.addEventListener('mouseenter', function() {
+      page.style.transition = 'background-color 30s ease';
+      page.style.backgroundColor = '#8B2020';
+      page.classList.add('red-bg');
+    });
+
+    logo.addEventListener('mouseleave', function() {
+      page.style.transition = 'background-color 3s ease';
+      page.style.backgroundColor = '#4854E0';
+      page.classList.remove('red-bg');
+    });
 
     function openModal() {
       modal.classList.add('active');
@@ -431,18 +348,12 @@
       modal.classList.remove('active');
     }
 
-    // Close on overlay click (not card click)
     modal.addEventListener('click', function(e) {
-      if (e.target === modal) {
-        closeModal();
-      }
+      if (e.target === modal) closeModal();
     });
 
-    // Close on Escape key
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeModal();
-      }
+      if (e.key === 'Escape') closeModal();
     });
   </script>
 
