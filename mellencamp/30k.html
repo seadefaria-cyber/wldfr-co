@@ -32,7 +32,7 @@
     width: 11in; height: 8.5in; position: relative; overflow: hidden;
     background: var(--bg); display: flex; flex-direction: column;
     justify-content: center; margin: 0 auto; page-break-after: always;
-    padding: 88px 104px;
+    padding: 72px 96px;
   }
   .page.centered { align-items: center; text-align: center; }
   .page:last-child { page-break-after: avoid; }
@@ -176,12 +176,12 @@
     color: var(--accent); opacity: 0.08; line-height: 1; z-index: 0;
     pointer-events: none; user-select: none;
   }
-  .phase-month { font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
-  .phase-title { font-family: var(--font-display); font-size: 72px; font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 28px; }
+  .phase-month { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+  .phase-title { font-family: var(--font-display); font-size: 64px; font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 20px; }
   .phase-title .accent { color: var(--accent); }
-  .phase-card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 24px; }
+  .phase-card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; }
   .phase-card ul { list-style: disc; padding-left: 16px; margin: 0; }
-  .phase-card li { font-size: 13px; font-weight: 500; line-height: 1.6; color: #e8e8e8; margin-bottom: 10px; }
+  .phase-card li { font-size: 12.5px; font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 8px; }
   .phase-card li:last-child { margin-bottom: 0; }
   .phase-note { font-family: var(--mono); font-size: 9px; color: #999; letter-spacing: 0.06em; text-align: center; margin-top: 16px; }
 
@@ -216,40 +216,51 @@
     95%, 100% { opacity: 0; }
   }
 
-  /* Month 2: Ember/flame particles */
-  .ember-field { position: relative; width: 200px; height: 280px; }
-  .ember {
-    position: absolute; bottom: 0; width: 4px; height: 4px;
-    border-radius: 50%; background: var(--accent);
-    opacity: 0; animation: emberRise linear infinite;
+  /* Month 2: Ignition shockwave */
+  .ignition-wrap { position: relative; width: 240px; height: 240px; display: flex; align-items: center; justify-content: center; }
+  .ignition-core {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 20px rgba(245,197,24,0.8), 0 0 40px rgba(245,197,24,0.4);
+    animation: corePulse 3s ease-in-out infinite;
   }
-  .ember:nth-child(1) { left: 30%; animation-duration: 3.5s; animation-delay: 0s; width: 3px; height: 3px; }
-  .ember:nth-child(2) { left: 55%; animation-duration: 4s; animation-delay: 0.5s; width: 5px; height: 5px; background: #fff; }
-  .ember:nth-child(3) { left: 40%; animation-duration: 3s; animation-delay: 1s; width: 3px; height: 3px; }
-  .ember:nth-child(4) { left: 70%; animation-duration: 4.5s; animation-delay: 0.3s; width: 4px; height: 4px; background: var(--accent-secondary); }
-  .ember:nth-child(5) { left: 20%; animation-duration: 3.8s; animation-delay: 1.5s; width: 3px; height: 3px; }
-  .ember:nth-child(6) { left: 60%; animation-duration: 3.2s; animation-delay: 2s; width: 5px; height: 5px; }
-  .ember:nth-child(7) { left: 45%; animation-duration: 4.2s; animation-delay: 0.8s; width: 3px; height: 3px; background: #fff; }
-  .ember:nth-child(8) { left: 75%; animation-duration: 3.6s; animation-delay: 1.2s; width: 4px; height: 4px; }
-  @keyframes emberRise {
-    0% { opacity: 0; transform: translateY(0) translateX(0); }
-    10% { opacity: 0.8; }
-    50% { opacity: 0.6; transform: translateY(-140px) translateX(8px); }
-    80% { opacity: 0.3; }
-    100% { opacity: 0; transform: translateY(-270px) translateX(-5px); }
+  @keyframes corePulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(245,197,24,0.8), 0 0 40px rgba(245,197,24,0.4); }
+    50% { transform: scale(1.3); box-shadow: 0 0 30px rgba(245,197,24,1), 0 0 60px rgba(245,197,24,0.6), 0 0 80px rgba(245,197,24,0.2); }
   }
-  /* Stylized flame shapes */
-  .flame-shape {
-    position: absolute; bottom: 10px; width: 40px; height: 60px;
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    background: radial-gradient(ellipse at bottom, rgba(245,197,24,0.25) 0%, transparent 70%);
-    animation: flameSway 2s ease-in-out infinite;
+  .shockwave {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    border-radius: 50%; border: 2px solid rgba(245,197,24,0.7);
+    animation: shockExpand 3s ease-out infinite;
   }
-  .flame-shape:nth-child(9) { left: 35%; animation-delay: 0s; }
-  .flame-shape:nth-child(10) { left: 55%; animation-delay: 0.5s; width: 30px; height: 45px; }
-  @keyframes flameSway {
-    0%, 100% { transform: scaleY(1) translateX(0); }
-    50% { transform: scaleY(1.1) translateX(3px); }
+  .shockwave:nth-child(2) { animation-delay: 0s; }
+  .shockwave:nth-child(3) { animation-delay: 0.6s; }
+  .shockwave:nth-child(4) { animation-delay: 1.2s; }
+  .shockwave:nth-child(5) { animation-delay: 1.8s; border-color: rgba(255,255,255,0.4); }
+  @keyframes shockExpand {
+    0% { width: 16px; height: 16px; opacity: 0.9; border-width: 2px; }
+    70% { opacity: 0.3; border-width: 1px; }
+    100% { width: 220px; height: 220px; opacity: 0; border-width: 0.5px; }
+  }
+  .spark-line {
+    position: absolute; top: 50%; left: 50%;
+    width: 2px; height: 30px; transform-origin: bottom center;
+    background: linear-gradient(to top, var(--accent), transparent);
+    opacity: 0; animation: sparkShoot 3s ease-out infinite;
+  }
+  .spark-line:nth-child(6)  { transform: rotate(0deg) translateY(-30px); animation-delay: 0.1s; }
+  .spark-line:nth-child(7)  { transform: rotate(45deg) translateY(-30px); animation-delay: 0.2s; }
+  .spark-line:nth-child(8)  { transform: rotate(90deg) translateY(-30px); animation-delay: 0.05s; }
+  .spark-line:nth-child(9)  { transform: rotate(135deg) translateY(-30px); animation-delay: 0.25s; }
+  .spark-line:nth-child(10) { transform: rotate(180deg) translateY(-30px); animation-delay: 0.15s; }
+  .spark-line:nth-child(11) { transform: rotate(225deg) translateY(-30px); animation-delay: 0.3s; }
+  .spark-line:nth-child(12) { transform: rotate(270deg) translateY(-30px); animation-delay: 0.08s; }
+  .spark-line:nth-child(13) { transform: rotate(315deg) translateY(-30px); animation-delay: 0.22s; }
+  @keyframes sparkShoot {
+    0% { opacity: 0; height: 0; }
+    10% { opacity: 0.9; height: 30px; }
+    40% { opacity: 0.5; height: 50px; }
+    100% { opacity: 0; height: 60px; }
   }
 
   /* Month 3: Radar sweep */
@@ -682,15 +693,15 @@
           <li>In parallel, establish and activate a network of fan-facing channels across TikTok, Instagram, YouTube, and Facebook to support distribution and scale.</li>
         </ul>
       </div>
-      <div style="margin-top: 18px;">
-        <div style="font-family: var(--mono); font-size: 9px; font-weight: 500; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px;">Example Narratives</div>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 6px 14px; white-space: nowrap;">"Just discovered and I'm obsessed"</div>
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 6px 14px; white-space: nowrap;">"This needs a comeback"</div>
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 6px 14px; white-space: nowrap;">"This song STILL holds up"</div>
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 6px 14px; white-space: nowrap;">"80s style was PEAK"</div>
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 6px 14px; white-space: nowrap;">"Stage presence is a lost art"</div>
-          <div style="font-family: var(--font); font-size: 11px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 6px 14px; white-space: nowrap;">"Pure aura maestro"</div>
+      <div style="margin-top: 14px;">
+        <div style="font-family: var(--mono); font-size: 8px; font-weight: 500; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;">Example Narratives</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"Just discovered and I'm obsessed"</div>
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"This needs a comeback"</div>
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"This song STILL holds up"</div>
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"80s style was PEAK"</div>
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"Stage presence is a lost art"</div>
+          <div style="font-family: var(--font); font-size: 10px; font-weight: 700; color: #fff; background: rgba(245,197,24,0.2); border: 1.5px solid rgba(245,197,24,0.45); border-radius: 24px; padding: 5px 12px; white-space: nowrap;">"Pure aura maestro"</div>
         </div>
       </div>
     </div>
@@ -736,17 +747,20 @@
       </div>
     </div>
     <div class="phase-right">
-      <div class="ember-field">
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="ember"></div>
-        <div class="flame-shape"></div>
-        <div class="flame-shape"></div>
+      <div class="ignition-wrap">
+        <div class="ignition-core"></div>
+        <div class="shockwave"></div>
+        <div class="shockwave"></div>
+        <div class="shockwave"></div>
+        <div class="shockwave"></div>
+        <div class="spark-line"></div>
+        <div class="spark-line"></div>
+        <div class="spark-line"></div>
+        <div class="spark-line"></div>
+        <div class="spark-line"></div>
+        <div class="spark-line"></div>
+        <div class="spark-line"></div>
+        <div class="spark-line"></div>
       </div>
     </div>
   </div>
