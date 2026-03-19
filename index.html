@@ -37,11 +37,46 @@
       transition: background-color 3s ease;
     }
 
+    /* ===== HEAT CURSOR ===== */
+    .heat-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heat-dot {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 80, 30, 0.08) 0%, transparent 70%);
+      transform: translate(-50%, -50%) scale(0.5);
+      animation: heatFade 1.2s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes heatFade {
+      0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+    }
+
     /* ===== LOGO ===== */
     .logo-wrap {
       cursor: pointer;
       opacity: 0;
       animation: fadeIn 1.5s ease forwards;
+      transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo-wrap:hover {
+      transform: translateY(-4px);
+    }
+
+    .logo-wrap:hover .logo-img {
+      filter: brightness(0) drop-shadow(0 0 20px rgba(255, 120, 60, 0.35)) drop-shadow(0 0 60px rgba(255, 80, 30, 0.15));
     }
 
     .logo-img {
@@ -49,45 +84,29 @@
       height: auto;
       display: block;
       filter: brightness(0);
-      transition: filter 0.6s ease;
+      transition: filter 2s ease;
     }
 
-    .page.red-bg .logo-img {
-      filter: brightness(100);
-    }
-
-    /* ===== CTA BUTTON ===== */
-    .cta-btn {
+    /* ===== CTA TEXT ===== */
+    .cta-text {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 14px;
-      letter-spacing: 0.2em;
-      padding: 10px 32px;
-      background: transparent;
-      color: #000000;
-      border: 1px solid rgba(0, 0, 0, 0.4);
-      border-radius: 4px;
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      color: rgba(0, 0, 0, 0.5);
       cursor: pointer;
-      margin-top: 12px;
+      margin-top: 16px;
+      background: none;
+      border: none;
+      padding: 8px 0;
+      transition: color 0.3s ease;
       opacity: 0;
       animation: fadeInUp 0.8s ease 1s forwards;
-      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      position: relative;
+      z-index: 2;
     }
 
-    .cta-btn:hover {
-      background: #000000;
-      color: #ffffff;
-      border-color: #000000;
-    }
-
-    .page.red-bg .cta-btn {
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.4);
-    }
-
-    .page.red-bg .cta-btn:hover {
-      background: #ffffff;
-      color: #000000;
-      border-color: #ffffff;
+    .cta-text:hover {
+      color: #000;
     }
 
     /* ===== FOOTER ===== */
@@ -100,6 +119,7 @@
       padding: 14px 0;
       opacity: 0;
       animation: fadeIn 1s ease 1.5s forwards;
+      z-index: 2;
     }
 
     .footer-text {
@@ -108,11 +128,6 @@
       font-weight: 300;
       letter-spacing: 0.15em;
       color: rgba(0, 0, 0, 0.2);
-      transition: color 0.4s ease;
-    }
-
-    .page.red-bg .footer-text {
-      color: rgba(255, 255, 255, 0.2);
     }
 
     /* ===== ANIMATIONS ===== */
@@ -251,15 +266,55 @@
       color: #000000;
     }
 
+    /* ===== FIRE RIPPLE ===== */
+    .ripple-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .fire-ripple {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 100, 30, 0.8);
+      background: radial-gradient(circle, rgba(255, 80, 20, 0.15) 0%, transparent 70%);
+      transform: translate(-50%, -50%) scale(0);
+      animation: fireRipple 0.6s ease-out forwards;
+    }
+
+    .fire-ripple.delay {
+      animation-delay: 0.1s;
+      border-width: 1px;
+    }
+
+    @keyframes fireRipple {
+      0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 1;
+        border-color: rgba(255, 100, 30, 0.8);
+      }
+      50% {
+        border-color: rgba(255, 60, 20, 0.5);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(8);
+        opacity: 0;
+        border-color: rgba(255, 40, 10, 0);
+      }
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
       .logo-img {
         width: 100px;
       }
 
-      .cta-btn {
-        padding: 9px 26px;
-        font-size: 12px;
+      .cta-text {
+        font-size: 11px;
       }
 
       .modal-card {
@@ -276,7 +331,7 @@
         width: 90px;
       }
 
-      .cta-btn {
+      .cta-text {
         margin-top: 10px;
       }
     }
@@ -285,14 +340,16 @@
 <body>
 
   <div class="page" id="page">
+    <div class="heat-layer" id="heatLayer"></div>
+
     <div class="logo-wrap" id="logo">
-      <img src="mellencamp/images/wldfr-white.png" alt="Wildfire" class="logo-img">
+      <img src="mellencamp/images/wldfr-white.png" alt="WLDFR" class="logo-img">
     </div>
 
-    <button class="cta-btn" onclick="openModal()">START A PROJECT</button>
+    <button class="cta-text" onclick="fireRipple(event)">START A PROJECT</button>
 
     <footer class="footer">
-      <div class="footer-text">&copy; 2026 Wildfire New York</div>
+      <div class="footer-text">WLDFR NYC</div>
     </footer>
   </div>
 
@@ -323,23 +380,46 @@
     </div>
   </div>
 
+  <div class="ripple-container" id="rippleContainer"></div>
+
   <script>
     var modal = document.getElementById('modal');
     var page = document.getElementById('page');
     var logo = document.getElementById('logo');
+    var heatLayer = document.getElementById('heatLayer');
 
+    // Logo hover: background slowly turns red over 30s, returns in 3s
     logo.addEventListener('mouseenter', function() {
       page.style.transition = 'background-color 30s ease';
       page.style.backgroundColor = '#8B2020';
-      page.classList.add('red-bg');
     });
 
     logo.addEventListener('mouseleave', function() {
       page.style.transition = 'background-color 3s ease';
       page.style.backgroundColor = '#4854E0';
-      page.classList.remove('red-bg');
     });
 
+    // Heat cursor effect (throttled, desktop only)
+    var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    var lastHeat = 0;
+
+    if (!isTouchDevice) {
+      document.addEventListener('mousemove', function(e) {
+        var now = Date.now();
+        if (now - lastHeat < 50) return;
+        lastHeat = now;
+
+        var heat = document.createElement('div');
+        heat.className = 'heat-dot';
+        heat.style.left = e.clientX + 'px';
+        heat.style.top = e.clientY + 'px';
+        heatLayer.appendChild(heat);
+
+        setTimeout(function() { heat.remove(); }, 1200);
+      });
+    }
+
+    // Modal controls
     function openModal() {
       modal.classList.add('active');
     }
@@ -348,6 +428,33 @@
       modal.classList.remove('active');
     }
 
+    // Fire ripple on button click, then open modal
+    function fireRipple(e) {
+      var container = document.getElementById('rippleContainer');
+      var rect = e.target.getBoundingClientRect();
+      var x = rect.left + rect.width / 2;
+      var y = rect.top + rect.height / 2;
+
+      var ripple1 = document.createElement('div');
+      ripple1.className = 'fire-ripple';
+      ripple1.style.left = x + 'px';
+      ripple1.style.top = y + 'px';
+      container.appendChild(ripple1);
+
+      var ripple2 = document.createElement('div');
+      ripple2.className = 'fire-ripple delay';
+      ripple2.style.left = x + 'px';
+      ripple2.style.top = y + 'px';
+      container.appendChild(ripple2);
+
+      setTimeout(function() {
+        modal.classList.add('active');
+        ripple1.remove();
+        ripple2.remove();
+      }, 500);
+    }
+
+    // Close modal on backdrop click or Escape
     modal.addEventListener('click', function(e) {
       if (e.target === modal) closeModal();
     });
