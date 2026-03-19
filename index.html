@@ -406,25 +406,39 @@
       el.addEventListener('mouseleave', stopHeat);
     });
 
-    // Heat cursor effect (throttled, desktop only)
-    var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    // Heat effect (mouse on desktop, tap on mobile)
     var lastHeat = 0;
 
-    if (!isTouchDevice) {
-      document.addEventListener('mousemove', function(e) {
-        var now = Date.now();
-        if (now - lastHeat < 50) return;
-        lastHeat = now;
-
-        var heat = document.createElement('div');
-        heat.className = 'heat-dot';
-        heat.style.left = e.clientX + 'px';
-        heat.style.top = e.clientY + 'px';
-        heatLayer.appendChild(heat);
-
-        setTimeout(function() { heat.remove(); }, 1200);
-      });
+    function createHeat(x, y) {
+      var heat = document.createElement('div');
+      heat.className = 'heat-dot';
+      heat.style.left = x + 'px';
+      heat.style.top = y + 'px';
+      heatLayer.appendChild(heat);
+      setTimeout(function() { heat.remove(); }, 1200);
     }
+
+    // Desktop: mousemove
+    document.addEventListener('mousemove', function(e) {
+      var now = Date.now();
+      if (now - lastHeat < 50) return;
+      lastHeat = now;
+      createHeat(e.clientX, e.clientY);
+    });
+
+    // Mobile: touchstart and touchmove
+    document.addEventListener('touchstart', function(e) {
+      var touch = e.touches[0];
+      createHeat(touch.clientX, touch.clientY);
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function(e) {
+      var now = Date.now();
+      if (now - lastHeat < 80) return;
+      lastHeat = now;
+      var touch = e.touches[0];
+      createHeat(touch.clientX, touch.clientY);
+    }, { passive: true });
 
     // Modal controls
     function openModal() {
