@@ -31,7 +31,8 @@
   .page {
     width: 11in; height: 8.5in; position: relative; overflow: hidden;
     background: var(--bg); display: flex; flex-direction: column;
-    justify-content: center; margin: 0 auto; page-break-after: always;
+    justify-content: center; align-items: center; text-align: center;
+    margin: 0 auto; page-break-after: always;
     padding: 72px 96px;
   }
   .page.centered { align-items: center; text-align: center; }
@@ -56,14 +57,12 @@
   @media print { body { background: #000; margin: 0; } .page { margin: 0; width: 100vw; height: 100vh; border-radius: 0; } }
 
   .page-logo {
-    position: absolute !important; top: 20px; left: 32px;
-    width: 52px; height: auto; z-index: 10;
-    text-transform: uppercase;
+    display: none;
   }
   .page-footer { position: absolute !important; bottom: 24px; left: 0; right: 0; font-family: var(--mono); font-size: 7px; font-weight: 400; letter-spacing: 0.15em; color: rgba(255,255,255,0.2); text-align: center; text-transform: uppercase; z-index: 10; }
   .page-meta { position: absolute !important; top: 36px; right: 48px; text-align: right; z-index: 10; }
-  .page-meta .line1 { font-family: var(--font); font-size: 11px; font-weight: 600; color: var(--text); letter-spacing: 0.08em; text-transform: uppercase; }
-  .page-meta .line2 { font-family: var(--mono); font-size: 9px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
+  .page-meta .line1 { font-family: var(--font); font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: 0.08em; text-transform: uppercase; }
+  .page-meta .line2 { font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
 
   .hero-title { font-family: var(--font-display); font-size: 108px; font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; }
   .hero-title .accent { color: var(--accent); }
@@ -71,33 +70,33 @@
   .section-title { font-family: var(--font-display); font-size: 80px; font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 28px; }
   .section-title .accent { color: var(--accent); }
 
-  .hero-sub { font-family: var(--font); font-size: 15px; font-weight: 500; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 28px; }
+  .hero-sub { font-family: var(--font); font-size: 19px; font-weight: 500; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 28px; }
 
-  .body-text { font-size: 17px; font-weight: 500; color: var(--text-secondary); line-height: 1.8; max-width: 540px; }
+  .body-text { font-size: 20px; font-weight: 500; color: var(--text-secondary); line-height: 1.8; max-width: 540px; margin-left: auto; margin-right: auto; }
 
-  .card-grid { display: grid; gap: 16px; width: 100%; margin-top: 20px; }
+  .card-grid { display: grid; gap: 16px; width: 100%; margin-top: 20px; margin-left: auto; margin-right: auto; max-width: 700px; }
   .card-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
   .card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px; text-align: left; }
   .card-num { font-family: var(--font-display); font-size: 42px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
-  .card h3 { font-family: var(--font); font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-  .card li { font-size: 13.5px; font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 3px; }
+  .card h3 { font-family: var(--font); font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .card li { font-size: 15px; font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 3px; }
   .card ul { list-style: disc; padding-left: 16px; margin-top: 6px; }
 
-  .split { display: flex; align-items: flex-start; gap: 72px; width: 100%; }
-  .split-left { flex-shrink: 0; width: 340px; }
-  .split-right { flex: 1; }
+  .split { display: flex; align-items: center; justify-content: center; gap: 72px; width: 100%; }
+  .split-left { flex-shrink: 0; width: 340px; text-align: left; }
+  .split-right { flex: 1; text-align: left; }
 
-  .budget-item { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: baseline; }
-  .budget-item .budget-phase { font-family: var(--font); font-size: 14px; font-weight: 600; color: var(--accent); }
-  .budget-item .budget-desc { font-size: 13px; color: #e0e0e0; font-weight: 500; margin-top: 4px; }
+  .budget-item { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: baseline; text-align: left; }
+  .budget-item .budget-phase { font-family: var(--font); font-size: 16px; font-weight: 600; color: var(--accent); }
+  .budget-item .budget-desc { font-size: 15px; color: #e0e0e0; font-weight: 500; margin-top: 4px; }
   .budget-item .budget-amount { font-family: var(--font); font-size: 17px; font-weight: 700; color: var(--text); flex-shrink: 0; margin-left: 24px; }
-  .budget-total { padding-top: 28px; margin-top: 8px; border-top: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: baseline; }
+  .budget-total { padding-top: 28px; margin-top: 8px; border-top: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: baseline; text-align: left; }
   .budget-total .label { font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--accent); text-transform: uppercase; }
   .budget-total .amount { font-family: var(--font-display); font-size: 40px; font-weight: 700; color: var(--accent); text-transform: uppercase; }
 
   .contact-block { text-align: left; }
-  .contact-block .contact-label { font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
-  .contact-block .contact-value { font-size: 17px; color: var(--text); font-weight: 400; margin-bottom: 20px; }
+  .contact-block .contact-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .contact-block .contact-value { font-size: 20px; color: var(--text); font-weight: 400; margin-bottom: 20px; }
   .contact-block .contact-value.accent { color: var(--accent); font-weight: 500; }
 
   /* TikTok phone mockup */
@@ -151,7 +150,7 @@
     align-items: center; justify-content: center; padding: 0 3px;
   }
 
-  .card-week { font-family: var(--mono); font-size: 9px; font-weight: 400; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+  .card-week { font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
 
   /* Geo-fence animations */
   @keyframes geoPulse {
@@ -183,23 +182,23 @@
   }
 
   /* Phase slide layout */
-  .phase-slide { display: flex; align-items: flex-start; gap: 40px; width: 100%; }
-  .phase-left { flex: 1; min-width: 0; max-width: 55%; }
+  .phase-slide { display: flex; align-items: center; justify-content: center; gap: 40px; width: 100%; max-width: 860px; margin: 0 auto; }
+  .phase-left { flex: 1; min-width: 0; max-width: 55%; text-align: left; }
   .phase-right { flex-shrink: 0; width: 40%; display: flex; align-items: center; justify-content: center; min-height: 340px; }
   .phase-watermark {
-    position: absolute; top: 50%; right: 80px; transform: translateY(-50%);
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
     font-family: var(--font-display); font-size: 280px; font-weight: 700;
     color: var(--accent); opacity: 0.08; line-height: 1; z-index: 0;
     pointer-events: none; user-select: none;
   }
-  .phase-month { font-family: var(--font-display); font-size: 24px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+  .phase-month { font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
   .phase-title { font-family: var(--font-display); font-size: 64px; font-weight: 700; color: var(--text); line-height: 0.95; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 20px; }
   .phase-title .accent { color: var(--accent); }
-  .phase-card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; }
+  .phase-card { background: var(--card); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: left; }
   .phase-card ul { list-style: disc; padding-left: 16px; margin: 0; }
-  .phase-card li { font-size: 12.5px; font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 8px; }
+  .phase-card li { font-size: 15px; font-weight: 500; line-height: 1.55; color: #e8e8e8; margin-bottom: 8px; }
   .phase-card li:last-child { margin-bottom: 0; }
-  .phase-note { font-family: var(--mono); font-size: 9px; color: #999; letter-spacing: 0.06em; text-align: center; margin-top: 16px; }
+  .phase-note { font-family: var(--mono); font-size: 12px; color: #999; letter-spacing: 0.06em; text-align: center; margin-top: 16px; }
 
   /* Month 1: Archive grid animation */
   .archive-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 200px; }
@@ -416,7 +415,7 @@
 
 
   <div class="obj-label">Objective</div>
-  <p class="body-text" style="max-width: 620px; text-align: center; font-size: 18px; line-height: 1.85;">Drive a sustained surge in cultural relevance and tour demand for John Mellencamp by strategically amplifying digital content, maximizing reach, engagement, and share of internet attention across platforms in the lead-up to the tour.</p>
+  <p class="body-text" style="max-width: 620px; text-align: center; font-size: 20px; line-height: 1.85;">Drive a sustained surge in cultural relevance and tour demand for John Mellencamp by strategically amplifying digital content, maximizing reach, engagement, and share of internet attention across platforms in the lead-up to the tour.</p>
 
   <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 2 / 13</div>
 </div>
@@ -427,11 +426,11 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-4.jpg');"></div>
 
 
-  <div style="display: flex; align-items: flex-start; gap: 32px; width: 100%;">
+  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 32px; width: 100%;">
     <!-- Left: Title + description -->
-    <div style="flex: 1; min-width: 260px;">
+    <div style="flex: 1; min-width: 260px; text-align: left;">
       <div class="section-title" style="font-size: 72px; color: #ffffff;">Clipping<span class="accent">.</span></div>
-      <p class="body-text" style="max-width: 380px; font-size: 14px; line-height: 1.7;">We source and repackage archival and contemporary footage, spanning performances, interviews, and behind-the-scenes moments, into high-performing short-form content optimized for TikTok, Instagram Reels, and YouTube Shorts. Our team manages a consistent daily publishing cadence across a network of strategically developed fan-facing channels to expand reach and drive sustained audience engagement.</p>
+      <p class="body-text" style="max-width: 380px; font-size: 17px; line-height: 1.7;">We source and repackage archival and contemporary footage, spanning performances, interviews, and behind-the-scenes moments, into high-performing short-form content optimized for TikTok, Instagram Reels, and YouTube Shorts. Our team manages a consistent daily publishing cadence across a network of strategically developed fan-facing channels to expand reach and drive sustained audience engagement.</p>
     </div>
 
     <!-- Center: TikTok phone mockup -->
@@ -562,10 +561,10 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-7.jpg');"></div>
 
 
-  <div style="display: flex; align-items: flex-start; gap: 56px; width: 100%;">
-    <div style="flex: 1;">
+  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 56px; width: 100%;">
+    <div style="flex: 1; text-align: left;">
       <div class="section-title" style="font-size: 64px;">Sound<br><span class="accent">Strategy.</span></div>
-      <p class="body-text" style="max-width: 420px; font-size: 14px; line-height: 1.7;">We activate John Mellencamp's catalog natively within TikTok, leveraging a proven resurgence model to reintroduce key tracks into short-form ecosystems. Through coordinated deployment across a network of fan-facing and seeding accounts, we drive early engagement signals that inform platform distribution. As momentum builds, audio is surfaced within discovery layers, triggering organic propagation and broader creator adoption without reliance on paid amplification.</p>
+      <p class="body-text" style="max-width: 420px; font-size: 17px; line-height: 1.7;">We activate John Mellencamp's catalog natively within TikTok, leveraging a proven resurgence model to reintroduce key tracks into short-form ecosystems. Through coordinated deployment across a network of fan-facing and seeding accounts, we drive early engagement signals that inform platform distribution. As momentum builds, audio is surfaced within discovery layers, triggering organic propagation and broader creator adoption without reliance on paid amplification.</p>
     </div>
 
     <!-- Generic creator TikTok mockup -->
@@ -649,17 +648,17 @@
   <div class="page-bg" style="background-image: url('images/mellencamp-scarecrow.jpg');"></div>
 
 
-  <div style="display: flex; align-items: flex-start; gap: 48px; width: 100%;">
-    <div style="flex: 1;">
+  <div style="display: flex; align-items: flex-start; justify-content: center; gap: 48px; width: 100%;">
+    <div style="flex: 1; text-align: left;">
       <div class="section-title" style="font-size: 64px;">City<br><span class="accent">Priming.</span></div>
       <div class="card-grid" style="grid-template-columns: 1fr; max-width: 420px;">
         <div class="card">
           <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 10px;">Localized Distribution</h3>
-          <p style="font-size: 14px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">Social platforms distribute content in part through localized signals. By aligning content with city-specific metadata, location tagging, regional hashtags, and engagement with local audiences, we influence how content is surfaced within a given market.</p>
+          <p style="font-size: 17px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">Social platforms distribute content in part through localized signals. By aligning content with city-specific metadata, location tagging, regional hashtags, and engagement with local audiences, we influence how content is surfaced within a given market.</p>
         </div>
         <div class="card">
           <h3 style="font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 10px;">Tour Market Activation</h3>
-          <p style="font-size: 14px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">In the weeks leading up to each tour stop, we deploy a coordinated wave of city-relevant Mellencamp content, localized messaging, past performance moments, and regional nostalgia, driving concentrated visibility and building anticipation within priority markets.</p>
+          <p style="font-size: 17px; font-weight: 500; color: var(--text-secondary); line-height: 1.65;">In the weeks leading up to each tour stop, we deploy a coordinated wave of city-relevant Mellencamp content, localized messaging, past performance moments, and regional nostalgia, driving concentrated visibility and building anticipation within priority markets.</p>
         </div>
       </div>
     </div>
@@ -702,7 +701,7 @@
 
   <div class="section-title" style="font-size: 72px; margin-bottom: 48px;">The <span class="accent">Rollout.</span></div>
 
-  <div style="display: flex; align-items: flex-start; width: 80%; max-width: 720px; position: relative;">
+  <div style="display: flex; align-items: flex-start; justify-content: center; width: 80%; max-width: 720px; position: relative;">
     <!-- Horizontal line connecting all dots -->
     <div style="position: absolute; top: 7px; left: 12.5%; right: 12.5%; height: 3px; background: var(--accent);"></div>
 
@@ -991,7 +990,7 @@
 
   <p class="body-text" style="margin-top: 32px; max-width: 540px; text-align: center;">We start within a week of signing. Content engine runs immediately. City priming activates as tour dates approach. First numbers in 14 days. All content cleared with your team before going live.</p>
 
-  <p style="font-size: 13px; color: var(--text-muted); margin-top: 28px;">Tour starts July 10. That gives us four months to build the machine before it matters most.</p>
+  <p style="font-size: 15px; color: var(--text-muted); margin-top: 28px;">Tour starts July 10. That gives us four months to build the machine before it matters most.</p>
 
   <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 12 / 13</div>
 </div>
@@ -1000,7 +999,6 @@
 <!-- 13: THANK YOU -->
 <div class="page">
   <div class="page-bg" style="background-image: url('images/mellencamp-5.jpg');"></div>
-  <img class="page-logo" src="images/wldfr-white.png" alt="WLDFR">
 
   <div class="page-meta">
     <div class="line1" style="color: var(--text-muted); text-transform: none;">wldfr.co</div>
@@ -1030,16 +1028,73 @@
 </div>
 
 
-<script>
-document.querySelectorAll('.page').forEach(function(page) {
-  if (!page.querySelector('.page-logo')) {
-    var img = document.createElement('img');
-    img.className = 'page-logo';
-    img.src = 'images/wldfr-white.png';
-    img.alt = 'WLDFR';
-    page.appendChild(img);
+<!-- logos removed -->
+
+<style>
+  .present-btn {
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    background: rgba(255,255,255,0.25); color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(255,255,255,0.4); border-radius: 6px;
+    padding: 8px 18px; font-family: var(--font); font-size: 13px;
+    font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; backdrop-filter: blur(8px);
+    transition: all 0.2s;
   }
-});
+  .present-btn:hover { background: rgba(255,255,255,0.25); color: #fff; }
+  body.presenting .present-btn { display: none; }
+  body.presenting .page { display: none; margin: 0; border-radius: 0; width: 100vw; height: 100vh; }
+  body.presenting .page.active-slide { display: flex; }
+  .slide-counter {
+    display: none; position: fixed; bottom: 24px; right: 32px; z-index: 9999;
+    font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.3);
+    letter-spacing: 0.1em;
+  }
+  body.presenting .slide-counter { display: block; }
+</style>
+
+<button class="present-btn" onclick="startPresentation()">Present</button>
+<div class="slide-counter" id="slideCounter"></div>
+
+<script>
+(function() {
+  var currentSlide = 0;
+  var pages = [];
+  var counter = document.getElementById('slideCounter');
+
+  function showSlide(n) {
+    pages.forEach(function(p) { p.classList.remove('active-slide'); });
+    currentSlide = Math.max(0, Math.min(n, pages.length - 1));
+    pages[currentSlide].classList.add('active-slide');
+    counter.textContent = (currentSlide + 1) + ' / ' + pages.length;
+  }
+
+  window.startPresentation = function() {
+    pages = Array.from(document.querySelectorAll('.page'));
+    document.body.classList.add('presenting');
+    document.documentElement.requestFullscreen().catch(function(){});
+    showSlide(0);
+  };
+
+  document.addEventListener('keydown', function(e) {
+    if (!document.body.classList.contains('presenting')) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault(); showSlide(currentSlide + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault(); showSlide(currentSlide - 1);
+    } else if (e.key === 'Escape') {
+      document.body.classList.remove('presenting');
+      pages.forEach(function(p) { p.classList.remove('active-slide'); });
+      if (document.fullscreenElement) document.exitFullscreen();
+    }
+  });
+
+  document.addEventListener('fullscreenchange', function() {
+    if (!document.fullscreenElement && document.body.classList.contains('presenting')) {
+      document.body.classList.remove('presenting');
+      pages.forEach(function(p) { p.classList.remove('active-slide'); });
+    }
+  });
+})();
 </script>
 </body>
 </html>
