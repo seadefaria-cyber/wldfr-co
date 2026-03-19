@@ -619,29 +619,63 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
+      nav {
+        height: 48px;
+        padding: 0 1.25rem;
+      }
+      .nav-logo { font-size: 1.1rem; }
       .nav-links { gap: 1.25rem; }
       .nav-links a { font-size: 0.6rem; }
 
-      .hero { height: 85svh; }
+      .hero {
+        height: 70svh;
+        min-height: 400px;
+      }
       .logo-img { width: 60px; }
-      .hero-headline { margin-top: 1.5rem; }
 
-      .section { padding: clamp(3rem, 8vw, 5rem) clamp(1.25rem, 4vw, 2rem); }
-      .section-heading { font-size: clamp(2rem, 8vw, 3rem); margin-bottom: 2rem; }
+      .section {
+        padding: clamp(3rem, 8vw, 5rem) clamp(1.25rem, 4vw, 2rem);
+      }
+      .section-heading {
+        font-size: clamp(2rem, 8vw, 3rem);
+        margin-bottom: 2rem;
+      }
 
-      .service-header { padding: 1.1rem 0; }
+      .service-header {
+        padding: 1.1rem 0;
+        min-height: 48px; /* touch target */
+      }
       .service-title { font-size: 0.9rem; }
       .service-left { gap: 0.75rem; }
-      .service-body p { font-size: 0.8rem; padding: 0 0.5rem 1rem 2.25rem; }
+      .service-body p {
+        font-size: 0.8rem;
+        padding: 0 0.5rem 1rem 2.25rem;
+        line-height: 1.6;
+      }
 
-      .client-name { font-size: 0.9rem; }
-      .client-separator { padding: 0 0.6rem; }
-
+      .contact-headline {
+        font-size: clamp(2rem, 8vw, 3rem);
+      }
+      .contact-sub { font-size: 0.85rem; }
       .contact-form input,
-      .contact-form textarea { padding: 0.75rem 0.9rem; font-size: 0.75rem; }
+      .contact-form textarea {
+        padding: 0.85rem 1rem;
+        font-size: 0.8rem;
+      }
+      .contact-form button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
 
-      .contact-socials { gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
-      .contact-socials a { font-size: 0.55rem; }
+      .contact-socials {
+        gap: 1.2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .contact-socials a {
+        font-size: 0.6rem;
+        padding: 0.5rem 0; /* larger touch target */
+      }
 
       footer {
         flex-direction: column;
@@ -650,8 +684,15 @@
         padding: 1.5rem 1.25rem;
       }
       .footer-info { text-align: center; }
+    }
 
-      .scroll-hint { bottom: 1.5rem; }
+    /* Small phones */
+    @media (max-width: 380px) {
+      .nav-links { gap: 0.8rem; }
+      .nav-links a { font-size: 0.55rem; letter-spacing: 0.05em; }
+      .logo-img { width: 50px; }
+      .section-heading { font-size: 1.8rem; }
+      .service-title { font-size: 0.85rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -840,7 +881,7 @@
       function initDots() {
         dots = [];
         // Grid spacing — not too dense
-        var spacing = window.innerWidth < 768 ? 28 : 22;
+        var spacing = window.innerWidth < 768 ? 36 : 22;
         var cols = Math.ceil(canvas.width / spacing);
         var rows = Math.ceil(canvas.height / spacing);
         numDots = cols * rows;
