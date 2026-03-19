@@ -352,6 +352,34 @@
     15%, 30% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 12px rgba(245,197,24,0.6); }
     40%, 100% { opacity: 0.2; transform: scale(1); box-shadow: none; }
   }
+
+  /* V2 logo shine */
+  .v2-shine {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+  .v2-shine::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: -120%;
+    width: 60%;
+    height: 140%;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      rgba(255,255,255,0.25) 45%,
+      rgba(255,255,255,0.5) 50%,
+      rgba(255,255,255,0.25) 55%,
+      transparent 70%
+    );
+    animation: v2Shine 2.5s ease-in-out 0.8s 1 forwards;
+  }
+  @keyframes v2Shine {
+    0% { left: -120%; }
+    100% { left: 180%; }
+  }
 </style>
 </head>
 <body>
@@ -367,7 +395,7 @@
   </div>
 
   <div class="hero-title">Digital<br>Amplification</div>
-  <div class="hero-title" style="font-size: 96px;"><span class="accent">V2</span></div>
+  <div class="hero-title" style="font-size: 96px;"><span class="accent v2-shine">V2</span></div>
   <div class="hero-sub">John Mellencamp 2026 Tour</div>
 
   <div class="page-footer">Confidential &middot; WLDFR &nbsp;&nbsp;&nbsp; 1 / 12</div>
