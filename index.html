@@ -107,15 +107,25 @@
     }
 
     .logo-wrap:hover .logo-img {
-      filter: sepia(1) saturate(3) brightness(0.8) hue-rotate(-10deg) drop-shadow(0 0 30px rgba(255, 160, 50, 0.4));
+      filter: brightness(0) invert(1) sepia(1) saturate(0.5) hue-rotate(-15deg) brightness(0.95) drop-shadow(0 0 20px rgba(200, 170, 100, 0.3));
     }
 
     .logo-img {
-      width: 140px;
+      width: 80px;
       height: auto;
       display: block;
-      filter: sepia(1) saturate(3) brightness(0.8) hue-rotate(-10deg);
+      filter: brightness(0) invert(1) sepia(1) saturate(0.5) hue-rotate(-15deg) brightness(0.85);
       transition: filter 0.5s ease;
+    }
+
+    .logo-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      color: rgba(200, 170, 100, 0.7);
+      margin-top: 10px;
+      text-align: center;
     }
 
     /* ===== FOOTER ===== */
@@ -340,6 +350,7 @@
 
     <div class="logo-wrap" id="logo" onclick="fireRipple(event)">
       <img src="mellencamp/images/wldfr-white.png" alt="WLDFR" class="logo-img">
+      <div class="logo-text">WLDFR</div>
     </div>
 
     <footer class="footer">
