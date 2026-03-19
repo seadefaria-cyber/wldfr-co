@@ -352,7 +352,7 @@
     <div class="modal-card">
       <button class="modal-close" onclick="closeModal()">&times;</button>
       <div class="modal-heading">START A PROJECT</div>
-      <form action="https://formspree.io/f/mwvradaw" method="POST">
+      <form id="contactForm">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required>
@@ -514,6 +514,37 @@
 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeModal();
+    });
+
+    // AJAX form submission to Formspree
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form = e.target;
+      var data = new FormData(form);
+
+      fetch('https://formspree.io/f/mwvradaw', {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(function(response) {
+        if (response.ok) {
+          form.reset();
+          var heading = document.querySelector('.modal-heading');
+          heading.textContent = 'SENT';
+          heading.style.color = '#4CAF50';
+          setTimeout(function() {
+            closeModal();
+            heading.textContent = 'START A PROJECT';
+            heading.style.color = 'rgba(200, 160, 60, 0.9)';
+          }, 2000);
+        } else {
+          alert('Something went wrong. Please try again.');
+        }
+      }).catch(function() {
+        alert('Something went wrong. Please try again.');
+      });
     });
   </script>
 
