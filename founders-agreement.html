@@ -92,12 +92,38 @@
     font-size: 10.5pt;
   }
 
+  .download-btn {
+    display: inline-block;
+    margin: 24px 0;
+    padding: 12px 32px;
+    font-family: Georgia, serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: #fff;
+    background: #111;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .download-btn:hover {
+    background: #444;
+  }
+
+  .download-wrap {
+    text-align: center;
+    margin-top: 20px;
+  }
+
   @media print {
     body {
       padding: 0;
       font-size: 10.5pt;
     }
     .section { margin-bottom: 12px; }
+    .download-wrap { display: none; }
   }
 </style>
 </head>
@@ -107,11 +133,11 @@
 <p class="date-line">Date: ___________________________</p>
 
 <p class="preamble">
-This Founders Agreement ("Agreement") is entered into by the undersigned individuals
-("Founders") for the purpose of establishing the terms of their partnership in building the
-business known as WLDFR (Wildfire), a digital marketing agency. This is a pre-formation agreement
-intended to govern the relationship between the Founders until a formal LLC operating agreement
-is executed. This agreement is intended to be legally binding upon execution by all parties.
+This is a simple founders agreement between the three of us as we start building WLDFR
+(Wildfire), a digital marketing agency. This is not an operating agreement. This just puts on
+paper that we're doing this together, who owns what, and the basics of how we work. Everything
+else, profit splits, vesting, IP, day-to-day policies, all of that gets handled properly in the
+LLC operating agreement once we form the entity. This is just the handshake on paper.
 </p>
 
 <div class="section">
@@ -129,33 +155,39 @@ is executed. This agreement is intended to be legally binding upon execution by 
 <div class="section">
   <p class="section-title">2. Roles and Responsibilities</p>
   <ul>
-    <li><strong>Amy 최아리:</strong> Strategy, management, supervision, pitching, and client
-    presentations. Amy brings over 10 years of agency experience.</li>
+    <li><strong>Amy 최아리:</strong> Strategy, management, supervision, client acquisition, pitching,
+    and client presentations. Amy brings over 10 years of agency experience.</li>
     <li><strong>Lukas Levine:</strong> Client acquisition and relationship management. Lukas is
     primarily responsible for bringing in and maintaining client relationships.</li>
-    <li><strong>Sean DeFaria:</strong> Digital marketing operations, AI technology and automation,
-    team training, and technical infrastructure. Sean introduced the AI-driven digital marketing workflow
-    that serves as the foundation of WLDFR's operations.</li>
+    <li><strong>Sean DeFaria:</strong> AI technology and infrastructure, editorial team management
+    and hiring, and digital marketing operations and execution.</li>
   </ul>
 </div>
 
 <div class="section">
   <p class="section-title">3. Decision Making and Governance</p>
   <p>
-    Day-to-day operations decisions may be made by any founder within their defined role. The
-    following require unanimous consent of all three founders: new hires, any single expense over
-    $5,000, new client contracts over $25,000, changes to equity, adding new founders, and
-    dissolution of the company.
+    All decisions affecting the company's finances, equity, partnerships, or direction require
+    unanimous consent of all three founders. No two founders may combine their equity to force
+    out, dilute, or overrule the third founder on any matter.
   </p>
   <p>
-    No two founders may combine their equity to force out, dilute, or overrule the third founder
-    on matters of removal, equity changes, or dissolution. Any decision to remove a founder,
-    change equity splits, or dissolve the company requires unanimous consent.
+    If a founder stops contributing to WLDFR for 30 consecutive days without written agreement
+    from the other founders, that founder forfeits their equity, which will be redistributed
+    proportionally to the remaining founders.
   </p>
 </div>
 
 <div class="section">
-  <p class="section-title">4. LLC Formation</p>
+  <p class="section-title">4. Outside Work</p>
+  <p>
+    No founder is exclusively bound to WLDFR. Each founder may take on outside work, clients,
+    and projects as long as that work does not directly compete with an active WLDFR engagement.
+  </p>
+</div>
+
+<div class="section">
+  <p class="section-title">5. LLC Formation</p>
   <p>
     The founders agree to form an LLC within 90 days of signing the first paying client, or within
     6 months of this agreement, whichever comes first. The state of formation will be decided by
@@ -164,12 +196,12 @@ is executed. This agreement is intended to be legally binding upon execution by 
 </div>
 
 <div class="section">
-  <p class="section-title">5. Governing Law</p>
+  <p class="section-title">6. Governing Law</p>
   <p>This agreement is governed by the laws of the State of New York.</p>
 </div>
 
 <div class="section">
-  <p class="section-title">6. Termination</p>
+  <p class="section-title">7. Termination</p>
   <p>
     This agreement terminates and is superseded upon execution of a formal LLC operating agreement
     by all founders.
@@ -201,6 +233,10 @@ is executed. This agreement is intended to be legally binding upon execution by 
     </div>
     <div class="sig-entry" style="flex: 0 0 48%;"></div>
   </div>
+</div>
+
+<div class="download-wrap">
+  <a href="WLDFR-Founders-Agreement.pdf" download class="download-btn">Download PDF</a>
 </div>
 
 </body>
