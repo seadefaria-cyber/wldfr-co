@@ -388,15 +388,22 @@
     var logo = document.getElementById('logo');
     var heatLayer = document.getElementById('heatLayer');
 
-    // Logo hover: background slowly turns red over 30s, returns in 3s
-    logo.addEventListener('mouseenter', function() {
+    // Any interactive element hover: background slowly turns red over 30s, returns in 3s
+    function startHeat() {
       page.style.transition = 'background-color 30s ease';
       page.style.backgroundColor = '#8B2020';
-    });
+    }
 
-    logo.addEventListener('mouseleave', function() {
+    function stopHeat() {
       page.style.transition = 'background-color 3s ease';
       page.style.backgroundColor = '#4854E0';
+    }
+
+    // Apply to logo, CTA button, and footer
+    var hotElements = document.querySelectorAll('.logo-wrap, .cta-text, .footer-text');
+    hotElements.forEach(function(el) {
+      el.addEventListener('mouseenter', startHeat);
+      el.addEventListener('mouseleave', stopHeat);
     });
 
     // Heat cursor effect (throttled, desktop only)
