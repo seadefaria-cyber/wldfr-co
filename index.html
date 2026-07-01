@@ -1,1105 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WLDFR — Digital Seeding + Creative Distribution | NYC</title>
-  <meta name="description" content="WLDFR is a digital marketing agency in New York City specializing in content distribution, social media seeding, and creative production for artists, labels, and brands.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%238B2020'/><text x='50%25' y='22' text-anchor='middle' font-family='system-ui,sans-serif' font-size='10' fill='%23C8A03C' font-weight='bold'>W</text></svg>">
-  <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg: #8B2020;
-      --bg-deep: #6B1818;
-      --bg-darker: #4A1010;
-      --surface: #7A1B1B;
-      --gold: rgba(200, 160, 60, 0.9);
-      --gold-dim: rgba(200, 160, 60, 0.4);
-      --gold-bright: rgba(220, 180, 70, 1);
-      --text: rgba(255, 255, 255, 0.9);
-      --text-muted: rgba(255, 255, 255, 0.5);
-      --text-faint: rgba(255, 255, 255, 0.25);
-      --border: rgba(255, 200, 50, 0.1);
-      --border-hover: rgba(255, 200, 50, 0.25);
-      --font: 'Inter', sans-serif;
-      --font-display: 'Bebas Neue', sans-serif;
-      --mono: 'JetBrains Mono', monospace;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-    }
-
-    /* ===== LARRY KING DOT GRID ===== */
-    #dotCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* ===== FIREPLACE GLOW ===== */
-    .fireplace {
-      position: fixed;
-      bottom: -30%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 140%;
-      height: 80%;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.4;
-    }
-
-    .fire-layer {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 50% 50% 0 0;
-      filter: blur(80px);
-    }
-
-    .fire-layer--1 {
-      width: 90%;
-      height: 60%;
-      background: radial-gradient(ellipse at 50% 100%, rgba(120, 15, 15, 0.6) 0%, transparent 70%);
-      animation: firePulse1 4s ease-in-out infinite;
-    }
-
-    .fire-layer--2 {
-      width: 60%;
-      height: 50%;
-      background: radial-gradient(ellipse at 50% 100%, rgba(160, 30, 20, 0.4) 0%, transparent 65%);
-      animation: firePulse2 3s ease-in-out infinite;
-    }
-
-    .fire-layer--3 {
-      width: 35%;
-      height: 40%;
-      background: radial-gradient(ellipse at 50% 100%, rgba(200, 50, 25, 0.3) 0%, transparent 60%);
-      animation: firePulse3 5s ease-in-out infinite;
-    }
-
-    .fire-layer--4 {
-      width: 20%;
-      height: 30%;
-      background: radial-gradient(ellipse at 50% 100%, rgba(220, 80, 30, 0.15) 0%, transparent 55%);
-      animation: firePulse1 3.5s ease-in-out infinite reverse;
-    }
-
-    @keyframes firePulse1 {
-      0%, 100% { opacity: 0.7; transform: translateX(-50%) scaleY(1); }
-      50% { opacity: 1; transform: translateX(-50%) scaleY(1.08); }
-    }
-
-    @keyframes firePulse2 {
-      0%, 100% { opacity: 0.6; transform: translateX(-48%) scaleY(1); }
-      50% { opacity: 1; transform: translateX(-52%) scaleY(1.12); }
-    }
-
-    @keyframes firePulse3 {
-      0%, 100% { opacity: 0.5; transform: translateX(-52%) scaleY(1); }
-      50% { opacity: 1; transform: translateX(-48%) scaleY(1.15); }
-    }
-
-    /* ===== NAV ===== */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 clamp(1.5rem, 5vw, 4rem);
-      background: rgba(139, 32, 32, 0.6);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      opacity: 0;
-      transform: translateY(-10px);
-      animation: navReveal 0.8s ease 0.5s forwards;
-    }
-
-    @keyframes navReveal {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      text-decoration: none;
-      transition: text-shadow 0.3s ease;
-    }
-
-    .nav-logo:hover {
-      text-shadow: 0 0 16px rgba(200, 160, 60, 0.5);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--gold);
-    }
-
-    /* ===== HERO ===== */
-    .hero {
-      height: 100vh;
-      height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .logo-wrap {
-      cursor: pointer;
-      opacity: 0;
-      animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
-      transition: transform 0.5s ease;
-      position: relative;
-    }
-
-    .logo-wrap:hover {
-      transform: scale(1.05);
-    }
-
-    .logo-wrap:hover .logo-img {
-      animation: yellowToDarkRed 2s ease forwards;
-    }
-
-    @keyframes yellowToDarkRed {
-      0% {
-        filter: brightness(0) invert(1) sepia(1) saturate(10) hue-rotate(15deg) brightness(1.2);
-      }
-      100% {
-        filter: brightness(0) invert(1) sepia(1) saturate(10) hue-rotate(-15deg) brightness(0.55);
-      }
-    }
-
-    .logo-img {
-      width: 80px;
-      height: auto;
-      display: block;
-      filter: brightness(0) invert(1) sepia(1) saturate(0.5) hue-rotate(-15deg) brightness(0.85);
-      transition: filter 0.3s ease;
-    }
-
-    .hero-tagline {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      font-weight: 300;
-      letter-spacing: 0.3em;
-      color: var(--gold-dim);
-      margin-top: 16px;
-      opacity: 0;
-      animation: fadeUp 1s ease 0.6s forwards;
-    }
-
-    .hero-headline {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 10vw, 6rem);
-      letter-spacing: 0.05em;
-      color: var(--text);
-      margin-top: 2rem;
-      line-height: 0.95;
-      opacity: 0;
-      animation: fadeUp 1s ease 0.9s forwards;
-    }
-
-    .hero-headline span {
-      color: var(--gold);
-    }
-
-    .hero-sub {
-      font-family: var(--font);
-      font-size: clamp(0.85rem, 2vw, 1rem);
-      font-weight: 300;
-      color: var(--text-muted);
-      margin-top: 1.5rem;
-      max-width: 400px;
-      line-height: 1.7;
-      opacity: 0;
-      animation: fadeUp 1s ease 1.2s forwards;
-    }
-
-    .hero-cta {
-      display: inline-block;
-      margin-top: 2.5rem;
-      padding: 0.85rem 2.5rem;
-      font-family: var(--font-display);
-      font-size: 1rem;
-      letter-spacing: 0.2em;
-      color: #1a1a1a;
-      background: var(--gold);
-      border: none;
-      border-radius: 4px;
-      text-decoration: none;
-      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-      opacity: 0;
-      animation: fadeUp 1s ease 1.5s forwards;
-    }
-
-    .hero-cta:hover {
-      background: var(--gold-bright);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(200, 160, 60, 0.25);
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--mono);
-      font-size: 0.55rem;
-      letter-spacing: 0.15em;
-      color: var(--text-faint);
-      opacity: 0;
-      animation: fadeUp 1s ease 2s forwards;
-    }
-
-    .scroll-hint::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 24px;
-      background: var(--gold-dim);
-      margin: 8px auto 0;
-      animation: scrollPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.2; transform: scaleY(0.6); }
-      50% { opacity: 0.6; transform: scaleY(1); }
-    }
-
-    /* ===== SECTIONS ===== */
-    .section {
-      position: relative;
-      z-index: 1;
-      padding: clamp(4rem, 10vw, 7rem) clamp(1.5rem, 5vw, 4rem);
-    }
-
-    .section-inner {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.6rem;
-      font-weight: 300;
-      letter-spacing: 0.2em;
-      color: var(--gold-dim);
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
-
-    .section-heading {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 7vw, 4rem);
-      letter-spacing: 0.04em;
-      color: var(--text);
-      margin-bottom: 3rem;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .section-heading.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .section-heading .heading-accent {
-      color: var(--gold);
-      text-shadow: 0 0 30px rgba(200, 160, 60, 0.3);
-    }
-
-    /* ===== SERVICES ===== */
-    .services {
-      background: rgba(0, 0, 0, 0.15);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .service-item {
-      border-bottom: 1px solid var(--border);
-      opacity: 0;
-      transform: translateY(12px);
-    }
-
-    .service-item.vis {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .service-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.4rem 0;
-      cursor: pointer;
-      -webkit-user-select: none;
-      user-select: none;
-      transition: background 0.3s ease;
-    }
-
-    .service-header:hover {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .service-header:hover .service-title {
-      color: var(--gold);
-    }
-
-    .service-left {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-    }
-
-    .service-num {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      font-weight: 400;
-      color: var(--gold);
-      min-width: 1.5rem;
-    }
-
-    .service-title {
-      font-family: var(--font);
-      font-weight: 500;
-      font-size: 1.05rem;
-      color: var(--text);
-      letter-spacing: -0.01em;
-      transition: color 0.3s ease;
-    }
-
-    .service-toggle {
-      width: 20px;
-      height: 20px;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .service-toggle::before,
-    .service-toggle::after {
-      content: '';
-      position: absolute;
-      background: var(--gold-dim);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
-    }
-
-    .service-toggle::before {
-      width: 12px;
-      height: 1.5px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .service-toggle::after {
-      width: 1.5px;
-      height: 12px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .service-item.open .service-toggle::after {
-      transform: translate(-50%, -50%) rotate(90deg);
-      opacity: 0;
-    }
-
-    .service-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .service-item.open .service-body {
-      max-height: 200px;
-    }
-
-    .service-body p {
-      font-size: 0.88rem;
-      font-weight: 300;
-      line-height: 1.7;
-      color: var(--text-muted);
-      padding: 0 0 1.4rem 2.75rem;
-    }
-
-    /* ===== CLIENTS ===== */
-    .clients {
-      text-align: center;
-    }
-
-    .clients-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0;
-      margin-top: 0.5rem;
-    }
-
-    .client-name {
-      font-family: var(--font-display);
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-      transition: color 0.3s ease, text-shadow 0.3s ease;
-      cursor: default;
-      padding: 0.3rem 0;
-    }
-
-    .client-name:hover {
-      color: var(--gold);
-      text-shadow: 0 0 20px rgba(200, 160, 60, 0.3);
-    }
-
-    .client-separator {
-      font-family: var(--font);
-      font-size: 0.6rem;
-      color: var(--text-faint);
-      align-self: center;
-      padding: 0 1rem;
-    }
-
-    /* ===== CONTACT ===== */
-    .contact {
-      background: rgba(0, 0, 0, 0.2);
-      border-top: 1px solid var(--border);
-    }
-
-    .contact-inner {
-      max-width: 500px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .contact-headline {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
-      letter-spacing: 0.05em;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-
-    .contact-headline .glow {
-      color: var(--gold);
-      text-shadow: 0 0 40px rgba(200, 160, 60, 0.5);
-    }
-
-    .contact-sub {
-      font-family: var(--font);
-      font-size: 0.9rem;
-      font-weight: 300;
-      color: var(--text-muted);
-      margin-bottom: 2.5rem;
-      line-height: 1.6;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      text-align: left;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 0.9rem 1.1rem;
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      outline: none;
-      transition: border-color 0.3s ease, background 0.3s ease;
-    }
-
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder {
-      color: var(--text-faint);
-    }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: var(--gold-dim);
-      background: rgba(0, 0, 0, 0.3);
-    }
-
-    .contact-form textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .contact-form button {
-      margin-top: 0.5rem;
-      padding: 0.85rem 2rem;
-      font-family: var(--font-display);
-      font-size: 1rem;
-      letter-spacing: 0.2em;
-      color: #1a1a1a;
-      background: var(--gold);
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    }
-
-    .contact-form button:hover {
-      background: var(--gold-bright);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(200, 160, 60, 0.25);
-    }
-
-    .contact-socials {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2.5rem;
-    }
-
-    .contact-socials a {
-      font-family: var(--mono);
-      font-size: 0.6rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .contact-socials a:hover {
-      color: var(--gold);
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      position: relative;
-      z-index: 1;
-      padding: 2rem clamp(1.5rem, 5vw, 4rem);
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .footer-brand {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      letter-spacing: 0.15em;
-      color: var(--gold-dim);
-      text-decoration: none;
-    }
-
-    .footer-info {
-      font-family: var(--mono);
-      font-size: 0.55rem;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: var(--text-faint);
-      text-align: right;
-      line-height: 1.8;
-    }
-
-    /* ===== ANIMATIONS ===== */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* ===== HEAT CURSOR ===== */
-    .heat-layer {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .heat-blob {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 100, 30, 0.1) 0%, transparent 70%);
-      transform: translate(-50%, -50%);
-      animation: heatBlobFade 1.5s ease-out forwards;
-      pointer-events: none;
-    }
-
-    @keyframes heatBlobFade {
-      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.8); }
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      nav {
-        height: 48px;
-        padding: 0 1.25rem;
-      }
-      .nav-logo { font-size: 1.1rem; }
-      .nav-links { gap: 1.25rem; }
-      .nav-links a { font-size: 0.6rem; }
-
-      .hero {
-        height: 70svh;
-        min-height: 400px;
-      }
-      .logo-img { width: 60px; }
-
-      .section {
-        padding: clamp(3rem, 8vw, 5rem) clamp(1.25rem, 4vw, 2rem);
-      }
-      .section-heading {
-        font-size: clamp(2rem, 8vw, 3rem);
-        margin-bottom: 2rem;
-      }
-
-      .service-header {
-        padding: 1.1rem 0;
-        min-height: 48px; /* touch target */
-      }
-      .service-title { font-size: 0.9rem; }
-      .service-left { gap: 0.75rem; }
-      .service-body p {
-        font-size: 0.8rem;
-        padding: 0 0.5rem 1rem 2.25rem;
-        line-height: 1.6;
-      }
-
-      .contact-headline {
-        font-size: clamp(2rem, 8vw, 3rem);
-      }
-      .contact-sub { font-size: 0.85rem; }
-      .contact-form input,
-      .contact-form textarea {
-        padding: 0.85rem 1rem;
-        font-size: 0.8rem;
-      }
-      .contact-form button {
-        padding: 1rem 2rem;
-        font-size: 1rem;
-      }
-
-      .contact-socials {
-        gap: 1.2rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .contact-socials a {
-        font-size: 0.6rem;
-        padding: 0.5rem 0; /* larger touch target */
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-        padding: 1.5rem 1.25rem;
-      }
-      .footer-info { text-align: center; }
-    }
-
-    /* Small phones */
-    @media (max-width: 380px) {
-      .nav-links { gap: 0.8rem; }
-      .nav-links a { font-size: 0.55rem; letter-spacing: 0.05em; }
-      .logo-img { width: 50px; }
-      .section-heading { font-size: 1.8rem; }
-      .service-title { font-size: 0.85rem; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { animation-duration: 0.01ms !important; transition-duration: 0.1s !important; }
-      .hero, .service-item { opacity: 1 !important; transform: none !important; }
-      #dotCanvas { display: none; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet">
+    <title>WLDFR</title>
+    <meta name="description" content="WLDFR is a seeding-first digital agency in New York City for artists, labels, and brands that lead culture.">
+    <meta property="og:title" content="WLDFR">
+    <meta property="og:description" content="A seeding-first digital agency for artists, labels & brands that lead culture, not chase it. New York City.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='16' fill='%23b23a2b'/><text x='50%25' y='22' text-anchor='middle' font-family='Helvetica,sans-serif' font-size='13' fill='%23f2ece1' font-weight='bold'>W</text></svg>">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root { --accent: #b23a2b; }
+
+        body {
+            background: #f5f1ea;
+            color: #1c1917;
+            font-family: 'Inter', Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        a { color: inherit; text-decoration: none; }
+
+        /* Noise */
+        .noise {
+            position: fixed; inset: 0; pointer-events: none;
+            z-index: 6000; opacity: 0.03; mix-blend-mode: hard-light;
+        }
+        .noise canvas { width: 100%; height: 100%; display: block; }
+
+        /* ======= NAV ======= */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 28px 40px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px; font-weight: 900; letter-spacing: 0.5px;
+            color: #1c1917; transition: opacity 0.8s ease;
+        }
+        .logo .logo-accent { color: var(--accent); }
+        .logo.faded { opacity: 0; pointer-events: none; }
+        .nav-links { display: flex; gap: 36px; list-style: none; }
+        .nav-links a {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px; font-weight: 700; letter-spacing: 2.2px;
+            text-transform: uppercase; color: #1c1917; opacity: 0.65;
+            transition: opacity 0.3s, color 0.3s;
+        }
+        .nav-links a:hover { opacity: 1; color: var(--accent); }
+
+        /* ======= SCROLL CUE ======= */
+        .scroll-cue {
+            position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%);
+            display: flex; align-items: center; gap: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px; font-weight: 700; letter-spacing: 2.2px;
+            text-transform: uppercase; color: #1c1917; cursor: pointer;
+            opacity: 0; transition: opacity 0.6s ease, color 0.3s ease; z-index: 50;
+        }
+        .scroll-cue.visible { opacity: 1; }
+        .scroll-cue:hover { color: var(--accent); }
+        .scroll-cue .arrow { display: inline-block; font-size: 14px; animation: bob 1.8s ease-in-out infinite; }
+        @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+        /* ======= HERO ======= */
+        .hero {
+            height: 100vh; height: 100dvh;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; cursor: pointer;
+        }
+        .hero-logo {
+            height: clamp(240px, 50vh, 520px);
+            width: auto;
+            opacity: 0;
+            animation: fadeIn 1.6s ease forwards;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+        .visually-hidden {
+            position: absolute; width: 1px; height: 1px; overflow: hidden;
+            clip: rect(0 0 0 0); white-space: nowrap;
+        }
+
+        /* ======= CLIENTS (moving marquee, lv8-style) ======= */
+        .clients { padding: 60px 0; background: #f5f1ea; border-top: 1px solid #e7ded0; overflow: hidden; }
+        .clients-eyebrow {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+            text-transform: uppercase; color: #1c1917; opacity: 0.4;
+            text-align: center; margin-bottom: 40px;
+        }
+        .marquee {
+            position: relative; width: 100%; overflow: hidden;
+            -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+        }
+        .marquee-track {
+            display: flex; align-items: center; gap: clamp(48px, 6vw, 88px);
+            width: max-content; animation: scrollLeft 42s linear infinite;
+        }
+        .clients:hover .marquee-track { animation-play-state: paused; }
+        .marquee-track img {
+            height: 28px; width: auto; flex-shrink: 0;
+            opacity: 0.5; transition: opacity 0.3s ease;
+        }
+        .marquee-track img.mid  { height: 34px; }
+        .marquee-track img.sq   { height: 40px; }
+        .marquee-track img.tall { height: 50px; }
+        .marquee-track img:hover { opacity: 0.95; }
+        @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* ======= SERVICES ======= */
+        .services { padding: 150px 80px 140px; background: #f5f1ea; }
+        .services-inner { max-width: 1280px; margin: 0 auto; }
+        .services-eyebrow {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+            text-transform: uppercase; color: #1c1917; opacity: 0.5; margin-bottom: 80px;
+        }
+        .services-grid { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: stretch; }
+        .services-list {
+            list-style: none; display: flex; flex-direction: column; gap: 40px; counter-reset: svc;
+        }
+        .services-list li { line-height: 1; position: relative; cursor: pointer; }
+        .services-list li::before {
+            counter-increment: svc;
+            content: counter(svc, decimal-leading-zero);
+            color: var(--accent);
+            font-family: 'Inter', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 2px;
+            display: block; margin-bottom: 14px;
+        }
+        .services-list h3 {
+            font-family: 'Inter', Helvetica, sans-serif;
+            font-weight: 900; font-size: clamp(54px, 11vw, 170px);
+            letter-spacing: -5px; line-height: 0.92; color: #1c1917;
+            transition: color 0.3s ease, transform 0.4s cubic-bezier(.2,.7,.2,1);
+            transform-origin: left center;
+        }
+        .services-list h3.serif-moment {
+            font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 600;
+            font-size: clamp(62px, 11.8vw, 185px); letter-spacing: -3px; line-height: 0.9;
+        }
+        .services-list h3.serif-roman {
+            font-family: 'Fraunces', Georgia, serif; font-style: normal; font-weight: 700;
+            font-size: clamp(58px, 11vw, 170px); letter-spacing: -3.5px; line-height: 0.9;
+        }
+        .services-list li:hover h3 { color: var(--accent); transform: translateX(0.35vw); }
+
+        .campaigns-label {
+            position: relative; display: flex; align-items: stretch; gap: 28px; padding-left: 24px;
+        }
+        .campaigns-rule {
+            width: 2px; background: #cfc4b2; transform: scaleY(0); transform-origin: top;
+            transition: transform 1.2s cubic-bezier(.77,0,.18,1);
+        }
+        .campaigns-word {
+            writing-mode: vertical-rl; transform: rotate(180deg);
+            font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 600;
+            font-size: clamp(52px, 9vw, 130px); letter-spacing: -1.5px; line-height: 1;
+            align-self: center; color: #1c1917; opacity: 0;
+            transition: opacity 1s ease 0.4s, letter-spacing 1s ease 0.4s;
+        }
+        .services.is-in .campaigns-rule { transform: scaleY(1); }
+        .services.is-in .campaigns-word { opacity: 1; letter-spacing: 2px; }
+
+        .services-subtitle {
+            margin: 48px 0 0; max-width: 62ch;
+            font-family: 'Inter', Helvetica, sans-serif; font-style: italic; font-weight: 400;
+            font-size: clamp(16px, 1.5vw, 22px); line-height: 1.35; letter-spacing: -0.2px;
+            color: var(--accent); min-height: 2.8em;
+        }
+        .services-subtitle__text {
+            display: inline-block;
+            transition: transform 0.45s cubic-bezier(.2,.7,.2,1), opacity 0.3s ease;
+            will-change: transform, opacity;
+        }
+        .services-subtitle__text.is-out { opacity: 0; transform: translateY(8px); }
+        .services-subtitle__text.is-in  { opacity: 0; transform: translateY(-8px); }
+
+        /* ======= CONTACT ======= */
+        .contact {
+            min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+            padding: 120px 80px 140px; background: #f5f1ea;
+        }
+        .contact-inner { max-width: 1280px; width: 100%; margin: 0 auto; }
+        .contact h2 {
+            font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 600;
+            font-size: clamp(72px, 12vw, 200px); letter-spacing: -3px; line-height: 0.9;
+            color: var(--accent); margin-bottom: 72px;
+        }
+        .form { display: flex; flex-direction: column; gap: 28px; width: 100%; max-width: 720px; }
+        .form-field { display: flex; flex-direction: column; gap: 8px; }
+        .form-field label {
+            font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2.2px;
+            text-transform: uppercase; color: #1c1917; opacity: 0.5;
+        }
+        .form input, .form textarea {
+            background: transparent; border: none; border-bottom: 1px solid #1c1917; color: #1c1917;
+            font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 500; letter-spacing: -0.3px;
+            padding: 12px 0; outline: none; transition: border-color 0.3s;
+            -webkit-appearance: none; border-radius: 0; width: 100%;
+        }
+        .form input:focus, .form textarea:focus {
+            border-bottom-color: var(--accent); border-bottom-width: 2px; padding-bottom: 11px;
+        }
+        .form textarea { resize: none; height: 90px; }
+        .form button {
+            background: #1c1917; color: #f5f1ea; border: none;
+            font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 900; letter-spacing: 2.5px;
+            text-transform: uppercase; padding: 22px 36px; cursor: pointer; transition: background 0.25s;
+            align-self: flex-start; margin-top: 16px; display: inline-flex; align-items: center; gap: 14px;
+        }
+        .form button .arrow { transition: transform 0.25s; display: inline-block; }
+        .form button:hover { background: var(--accent); }
+        .form button:hover .arrow { transform: translateX(6px); }
+
+        /* ======= FOOTER ======= */
+        footer {
+            padding: 40px 48px; border-top: 1px solid #1c1917;
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2.2px;
+            text-transform: uppercase; color: #1c1917; background: #f5f1ea;
+        }
+        footer a { color: #1c1917; transition: color 0.3s; }
+        footer a:hover { color: var(--accent); }
+        footer .footer-links { display: flex; gap: 28px; align-items: center; }
+        footer .footer-email { color: var(--accent); }
+
+        /* ======= RESPONSIVE ======= */
+        @media (max-width: 768px) {
+            nav { padding: 20px 20px; }
+            .nav-links { display: none; }
+            .clients { padding: 44px 0; }
+            .marquee-track { gap: 44px; }
+            .marquee-track img { height: 24px; }
+            .services { padding: 100px 24px 80px; }
+            .services-eyebrow { margin-bottom: 48px; }
+            .services-list { gap: 28px; }
+            .services-list h3 { letter-spacing: -2.5px; }
+            .services-grid { grid-template-columns: 1fr; gap: 32px; }
+            .services-list li:hover h3 { transform: none; }
+            .services-subtitle { font-size: 15px; min-height: 3.6em; margin-top: 32px; }
+            .campaigns-label { flex-direction: row; align-items: center; justify-content: flex-start; padding: 16px 0 0; gap: 16px; }
+            .campaigns-rule { width: 40%; height: 2px; transform: scaleX(0); transform-origin: left; transition: transform 1.1s cubic-bezier(.77,0,.18,1); }
+            .services.is-in .campaigns-rule { transform: scaleX(1); }
+            .campaigns-word { writing-mode: horizontal-tb; transform: none; font-size: clamp(28px, 9vw, 56px); letter-spacing: 1px; }
+            .services.is-in .campaigns-word { letter-spacing: 2px; }
+            .contact { padding: 80px 24px; }
+            .contact h2 { letter-spacing: -3px; margin-bottom: 48px; }
+            .form { max-width: 100%; }
+            footer { padding: 20px; flex-direction: column; gap: 10px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-logo { opacity: 1 !important; animation: none; }
+            .marquee-track { animation: none; }
+            .services-subtitle__text { transition: opacity 0.15s ease; transform: none !important; }
+            .services-list h3 { transition: color 0.2s ease; transform: none !important; }
+            .campaigns-rule, .campaigns-word { transition: none; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Larry King Dot Grid -->
-  <canvas id="dotCanvas"></canvas>
+<div class="noise"><canvas id="noise"></canvas></div>
 
-  <!-- Fireplace glow -->
-  <div class="fireplace">
-    <div class="fire-layer fire-layer--1"></div>
-    <div class="fire-layer fire-layer--2"></div>
-    <div class="fire-layer fire-layer--3"></div>
-    <div class="fire-layer fire-layer--4"></div>
-  </div>
-
-  <!-- Heat cursor layer -->
-  <div class="heat-layer" id="heatLayer"></div>
-
-  <!-- Nav -->
-  <nav>
-    <a href="/" class="nav-logo">WLDFR</a>
+<nav>
+    <a href="#services" class="logo">WLDFR<span class="logo-accent">.</span></a>
     <ul class="nav-links">
-      <li><a href="#services">services</a></li>
-      <li><a href="#contact">contact</a></li>
+        <li><a href="#services">Work</a></li>
+        <li><a href="#contact">Let's Work</a></li>
     </ul>
-  </nav>
+</nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="logo-wrap" id="logo">
-      <img src="mellencamp/images/wldfr-white.png" alt="WLDFR" class="logo-img">
+<!-- Hero -->
+<section class="hero" id="hero">
+    <h1 class="visually-hidden">WLDFR</h1>
+    <img class="hero-logo" src="assets/brand/wldfr-logo-terracotta.png" alt="WLDFR">
+
+    <a href="#clients" class="scroll-cue" id="scrollCue">
+        <span class="arrow">↓</span>
+        <span>The Work</span>
+    </a>
+</section>
+
+<!-- Clients -->
+<section class="clients" id="clients">
+    <p class="clients-eyebrow">Trusted by the names that move culture</p>
+    <div class="marquee">
+        <div class="marquee-track" id="clientTrack">
+            <img src="assets/logos-verified/live-nation.png" alt="Live Nation">
+            <img class="tall" src="assets/logos-verified/interscope.png" alt="Interscope Records">
+            <img src="assets/logos-verified/republic-records.png" alt="Republic Records">
+            <img class="tall" src="assets/logos-verified/cactus-jack.png" alt="Cactus Jack">
+            <img class="tall" src="assets/logos-verified/lyrical-lemonade.png" alt="Lyrical Lemonade TV">
+            <img class="mid" src="assets/logos-verified/summer-smash.png" alt="Summer Smash">
+            <img class="sq" src="assets/logos-verified/twitch.png" alt="Twitch">
+            <img src="assets/logos-verified/kick.png" alt="Kick">
+            <img src="assets/logos-verified/whop.png" alt="Whop">
+            <img class="sq" src="assets/logos-verified/asspizza.png" alt="ASSPIZZA">
+        </div>
     </div>
-  </section>
+</section>
 
-  <!-- Services -->
-  <section class="section services" id="services">
-    <div class="section-inner">
-      <div class="section-label">what we do</div>
-      <div class="section-heading" id="seedHeading">HOW WE <span class="heading-accent">SEED.</span></div>
-
-      <div class="service-item" data-d="0">
-        <div class="service-header">
-          <div class="service-left">
-            <span class="service-num">01</span>
-            <span class="service-title">Digital Distribution</span>
-          </div>
-          <div class="service-toggle"></div>
+<!-- Services -->
+<section class="services" id="services">
+    <div class="services-inner">
+        <p class="services-eyebrow">What We Do</p>
+        <div class="services-grid">
+            <ul class="services-list">
+                <li data-desc="A deep network of pages, creators, and channels. We place your drop where culture already lives."><h3>SEEDING</h3></li>
+                <li data-desc="Clippers on standby and full live production. From shoot to post to seeded, in-house."><h3 class="serif-moment">Production</h3></li>
+                <li data-desc="Paid placement and the right creators. Reach bought through channels people actually trust."><h3 class="serif-roman">PAID MEDIA</h3></li>
+            </ul>
+            <aside class="campaigns-label" aria-hidden="true">
+                <span class="campaigns-rule"></span>
+                <span class="campaigns-word">CAMPAIGNS</span>
+            </aside>
         </div>
-        <div class="service-body">
-          <p>Multi-platform content placement across pages, blogs, and accounts. Coordinated rollouts that reach every corner of the internet.</p>
-        </div>
-      </div>
-
-      <div class="service-item" data-d="60">
-        <div class="service-header">
-          <div class="service-left">
-            <span class="service-num">02</span>
-            <span class="service-title">Content Strategy</span>
-          </div>
-          <div class="service-toggle"></div>
-        </div>
-        <div class="service-body">
-          <p>We plan what goes where and when. Platform-specific formats, timing, and narrative built around your goals.</p>
-        </div>
-      </div>
-
-      <div class="service-item" data-d="120">
-        <div class="service-header">
-          <div class="service-left">
-            <span class="service-num">03</span>
-            <span class="service-title">Creative + Live Production</span>
-          </div>
-          <div class="service-toggle"></div>
-        </div>
-        <div class="service-body">
-          <p>Clippers on standby for short-form content across every platform. Full live production for streams, album rollouts, and event coverage.</p>
-        </div>
-      </div>
-
-      <div class="service-item" data-d="180">
-        <div class="service-header">
-          <div class="service-left">
-            <span class="service-num">04</span>
-            <span class="service-title">Seeding Network</span>
-          </div>
-          <div class="service-toggle"></div>
-        </div>
-        <div class="service-body">
-          <p>Direct connections to pages, blogs, and accounts across every platform. A deep network built over years, not cold outreach.</p>
-        </div>
-      </div>
-
-      <div class="service-item" data-d="240">
-        <div class="service-header">
-          <div class="service-left">
-            <span class="service-num">05</span>
-            <span class="service-title">Paid Placement</span>
-          </div>
-          <div class="service-toggle"></div>
-        </div>
-        <div class="service-body">
-          <p>Strategic paid placements across high-traffic pages and channels. We buy reach through real channels, not ad dashboards.</p>
-        </div>
-      </div>
-
-      <div class="service-item" data-d="300">
-        <div class="service-header">
-          <div class="service-left">
-            <span class="service-num">06</span>
-            <span class="service-title">Influencer Marketing</span>
-          </div>
-          <div class="service-toggle"></div>
-        </div>
-        <div class="service-body">
-          <p>We connect with the right creators to amplify reach and drive real engagement.</p>
-        </div>
-      </div>
+        <p class="services-subtitle" aria-live="polite">
+            <span class="services-subtitle__text">We don't chase trends. We light them.</span>
+        </p>
     </div>
-  </section>
+</section>
 
-
-  <!-- Contact -->
-  <section class="section contact" id="contact">
+<!-- Contact -->
+<section class="contact" id="contact">
     <div class="contact-inner">
-      <div class="section-label">let's work</div>
-      <h2 class="contact-headline">START A <span class="glow">PROJECT.</span></h2>
-      <p class="contact-sub">Tell us what you're building. We'll figure out how to set it on fire.</p>
-
-      <form class="contact-form" action="https://formsubmit.co/sean@wldfr.co" method="POST">
-        <input type="hidden" name="_subject" value="New inquiry from wldfr.co">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="text" name="name" placeholder="name" required>
-        <input type="email" name="email" placeholder="email" required>
-        <input type="text" name="project" placeholder="artist / project">
-        <textarea name="message" placeholder="tell us about your project"></textarea>
-        <button type="submit">GET STARTED</button>
-      </form>
-
-      <div class="contact-socials">
-        <a href="https://instagram.com/wldfyre" target="_blank">Instagram</a>
-        <a href="https://tiktok.com/@wldfr" target="_blank">TikTok</a>
-        <a href="https://x.com/wldfr" target="_blank">X</a>
-        <a href="mailto:sean@wldfr.co">Email</a>
-      </div>
+        <h2>let's work.</h2>
+        <form class="form" action="https://formsubmit.co/sean@wldfr.co" method="POST">
+            <input type="hidden" name="_subject" value="New inquiry from wldfr.co">
+            <input type="hidden" name="_captcha" value="false">
+            <div class="form-field">
+                <label for="f-name">Name</label>
+                <input id="f-name" type="text" name="name" required>
+            </div>
+            <div class="form-field">
+                <label for="f-email">Email</label>
+                <input id="f-email" type="email" name="email" required>
+            </div>
+            <div class="form-field">
+                <label for="f-project">Artist / Project / Brand</label>
+                <input id="f-project" type="text" name="project">
+            </div>
+            <div class="form-field">
+                <label for="f-message">Tell us about it</label>
+                <textarea id="f-message" name="message"></textarea>
+            </div>
+            <button type="submit">Send <span class="arrow">→</span></button>
+        </form>
     </div>
-  </section>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <a href="/" class="footer-brand">WLDFR</a>
-    <div class="footer-info">
-      &copy; 2026 WLDFR<br>
-      New York City
-    </div>
-  </footer>
+<footer>
+    <span>&copy; 2026 WLDFR&trade; &nbsp;·&nbsp; New York City</span>
+    <span class="footer-links">
+        <a href="mailto:sean@wldfr.co" class="footer-email">sean@wldfr.co</a>
+        <a href="https://instagram.com/wldfyre" target="_blank" rel="noopener">Instagram ↗</a>
+    </span>
+</footer>
 
-  <script>
-    /* ===== LARRY KING DOT GRID ===== */
-    (function() {
-      var canvas = document.getElementById('dotCanvas');
-      var ctx = canvas.getContext('2d');
-      var dots = [];
-      var numDots = 0;
+<script>
+// ======= CLIENT MARQUEE (duplicate for seamless -50% loop) =======
+(function(){ var t = document.getElementById('clientTrack'); if (t) t.innerHTML += t.innerHTML; })();
 
-      // Shades of red / crimson / maroon / scarlet
-      var colors = [
-        [139, 32, 32],    // crimson (base)
-        [107, 24, 24],    // deep maroon
-        [170, 40, 40],    // scarlet
-        [90, 15, 15],     // dark blood
-        [160, 50, 30],    // burnt red
-        [120, 20, 20],    // wine
-        [200, 60, 40],    // bright scarlet
-        [80, 12, 12],     // near-black red
-        [150, 35, 25],    // rust
-        [110, 28, 28],    // mahogany
-        [180, 45, 35],    // fire red
-        [95, 18, 18],     // oxblood
-      ];
+// ======= NOISE =======
+const nc = document.getElementById('noise');
+const nx = nc.getContext('2d');
+function szN() { nc.width = window.innerWidth; nc.height = window.innerHeight; }
+szN(); window.addEventListener('resize', szN);
+let nf = 0;
+function grain() {
+    if (++nf % 3 !== 0) { requestAnimationFrame(grain); return; }
+    const w = nc.width, h = nc.height;
+    const img = nx.createImageData(w, h);
+    const d = img.data;
+    for (let i = 0; i < d.length; i += 4) {
+        const v = Math.random() * 255;
+        d[i] = d[i+1] = d[i+2] = v; d[i+3] = 255;
+    }
+    nx.putImageData(img, 0, 0);
+    requestAnimationFrame(grain);
+}
+grain();
 
-      function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = document.documentElement.scrollHeight;
-        initDots();
-      }
+// ======= HERO: reveal scroll cue, fade nav logo over hero, restore on scroll =======
+const navLogo = document.querySelector('.logo');
+setTimeout(() => { document.getElementById('scrollCue')?.classList.add('visible'); }, 900);
+setTimeout(() => { if (window.scrollY < window.innerHeight * 0.5) navLogo?.classList.add('faded'); }, 1400);
+document.getElementById('hero').addEventListener('click', () => {
+    document.getElementById('clients').scrollIntoView({ behavior: 'smooth' });
+});
+window.addEventListener('scroll', () => {
+    navLogo?.classList.toggle('faded', window.scrollY < window.innerHeight * 0.5);
+}, { passive: true });
 
-      function initDots() {
-        dots = [];
-        // Grid spacing — not too dense
-        var spacing = window.innerWidth < 768 ? 36 : 22;
-        var cols = Math.ceil(canvas.width / spacing);
-        var rows = Math.ceil(canvas.height / spacing);
-        numDots = cols * rows;
+// ======= SERVICES SCROLL REVEAL =======
+const servicesSection = document.querySelector('.services');
+if (servicesSection && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => { if (e.isIntersecting) { servicesSection.classList.add('is-in'); obs.unobserve(servicesSection); } });
+    }, { threshold: 0.35 });
+    io.observe(servicesSection);
+}
 
-        for (var r = 0; r < rows; r++) {
-          for (var c = 0; c < cols; c++) {
-            var color = colors[Math.floor(Math.random() * colors.length)];
-            dots.push({
-              x: c * spacing + spacing / 2,
-              y: r * spacing + spacing / 2,
-              baseRadius: 1.2 + Math.random() * 1.3,
-              radius: 0,
-              color: color,
-              phase: Math.random() * Math.PI * 2,
-              speed: 0.3 + Math.random() * 0.8,
-              baseAlpha: 0.08 + Math.random() * 0.18,
-              alpha: 0
-            });
-          }
-        }
-      }
-
-      var lastTime = 0;
-      function draw(time) {
-        if (!lastTime) lastTime = time;
-        var dt = (time - lastTime) / 1000;
-        lastTime = time;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Only draw dots that are near the viewport for performance
-        var scrollY = window.scrollY || window.pageYOffset;
-        var viewTop = scrollY - 100;
-        var viewBot = scrollY + window.innerHeight + 100;
-
-        for (var i = 0; i < dots.length; i++) {
-          var d = dots[i];
-
-          // Skip dots far outside viewport
-          if (d.y < viewTop || d.y > viewBot) continue;
-
-          // Gentle pulsing
-          d.phase += d.speed * dt;
-          var pulse = Math.sin(d.phase);
-          d.alpha = d.baseAlpha + pulse * 0.08;
-          d.radius = d.baseRadius + pulse * 0.4;
-
-          if (d.alpha <= 0) continue;
-
-          ctx.beginPath();
-          ctx.arc(d.x, d.y, d.radius, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(' + d.color[0] + ',' + d.color[1] + ',' + d.color[2] + ',' + d.alpha + ')';
-          ctx.fill();
-        }
-
-        requestAnimationFrame(draw);
-      }
-
-      window.addEventListener('resize', resize);
-      resize();
-      requestAnimationFrame(draw);
-
-      // Resize canvas when content changes height
-      var resizeObserver = new ResizeObserver(function() {
-        canvas.height = document.documentElement.scrollHeight;
-      });
-      resizeObserver.observe(document.body);
-    })();
-
-    /* ===== HEAT CURSOR (subtle) ===== */
-    (function() {
-      var heatLayer = document.getElementById('heatLayer');
-      var lastBlob = 0;
-
-      document.addEventListener('mousemove', function(e) {
-        var now = Date.now();
-        if (now - lastBlob > 60) {
-          lastBlob = now;
-          var blob = document.createElement('div');
-          blob.className = 'heat-blob';
-          blob.style.left = e.clientX + 'px';
-          blob.style.top = e.clientY + 'px';
-          heatLayer.appendChild(blob);
-          setTimeout(function() { blob.remove(); }, 1500);
-        }
-      });
-    })();
-
-    /* ===== SCROLL REVEAL ===== */
-    (function() {
-      // Service items
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            setTimeout(function() { e.target.classList.add('vis'); }, +(e.target.dataset.d || 0));
-            obs.unobserve(e.target);
-          }
+// ======= SERVICE HOVER (morphing subtitle) + CLICK TO CONTACT =======
+(function() {
+    const list = document.querySelector('.services-list');
+    const items = document.querySelectorAll('.services-list li');
+    const slot = document.querySelector('.services-subtitle__text');
+    if (!list || !items.length || !slot) return;
+    const DEFAULT = slot.textContent;
+    let current = DEFAULT, token = 0;
+    function swap(next) {
+        if (next === current) return;
+        current = next; const id = ++token;
+        slot.classList.add('is-out');
+        slot.addEventListener('transitionend', function handler() {
+            slot.removeEventListener('transitionend', handler);
+            if (id !== token) return;
+            slot.textContent = next;
+            slot.classList.remove('is-out'); slot.classList.add('is-in');
+            requestAnimationFrame(() => requestAnimationFrame(() => slot.classList.remove('is-in')));
+        }, { once: true });
+    }
+    items.forEach(li => {
+        li.addEventListener('mouseenter', () => swap(li.dataset.desc || DEFAULT));
+        li.addEventListener('click', () => {
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('.service-item').forEach(function(el) { obs.observe(el); });
-
-      // Section headings
-      var headingObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            headingObs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.15 });
-
-      document.querySelectorAll('.section-heading').forEach(function(el) { headingObs.observe(el); });
-    })();
-
-    /* ===== SERVICE ACCORDION ===== */
-    document.querySelectorAll('.service-header').forEach(function(header) {
-      header.addEventListener('click', function() {
-        var item = header.parentElement;
-        var wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.service-item.open').forEach(function(el) {
-          el.classList.remove('open');
-        });
-        if (!wasOpen) item.classList.add('open');
-      });
     });
-
-    /* ===== SMOOTH NAV SCROLLING ===== */
-    document.querySelectorAll('nav a[href^="#"]').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        var target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    });
-  </script>
-
+    list.addEventListener('mouseleave', () => swap(DEFAULT));
+})();
+</script>
 </body>
 </html>
