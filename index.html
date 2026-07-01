@@ -74,11 +74,36 @@
             display: flex; align-items: center; justify-content: center;
             position: relative; cursor: pointer;
         }
+        .hero-logo-wrap { position: relative; display: inline-block; line-height: 0; }
         .hero-logo {
-            height: clamp(240px, 50vh, 520px);
+            display: block;
+            height: clamp(72px, 11vh, 120px);
             width: auto;
             opacity: 0;
-            animation: fadeIn 1.6s ease forwards;
+            filter: blur(12px);
+            transform: scale(0.94);
+            animation: logoDissolve 1.7s cubic-bezier(.2,.7,.2,1) 0.15s forwards;
+        }
+        @keyframes logoDissolve {
+            0%   { opacity: 0; filter: blur(12px); transform: scale(0.94); }
+            60%  { opacity: 1; }
+            100% { opacity: 1; filter: blur(0); transform: scale(1); }
+        }
+        .hero-shine {
+            position: absolute; inset: 0; pointer-events: none;
+            -webkit-mask: url("assets/brand/wldfr-logo-terracotta.png") center / contain no-repeat;
+                    mask: url("assets/brand/wldfr-logo-terracotta.png") center / contain no-repeat;
+            background: linear-gradient(105deg, transparent 42%, rgba(255,248,240,0.9) 50%, transparent 58%);
+            background-size: 300% 100%;
+            background-position: 165% 0;
+            opacity: 0;
+            animation: logoShine 1.5s ease-out 1.15s 1 forwards;
+        }
+        @keyframes logoShine {
+            0%   { background-position: 165% 0; opacity: 0; }
+            18%  { opacity: 1; }
+            88%  { opacity: 1; }
+            100% { background-position: -65% 0; opacity: 0; }
         }
         @keyframes fadeIn { to { opacity: 1; } }
         .visually-hidden {
@@ -256,7 +281,8 @@
             footer { padding: 20px; flex-direction: column; gap: 10px; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .hero-logo { opacity: 1 !important; animation: none; }
+            .hero-logo { opacity: 1 !important; animation: none; filter: none !important; transform: none !important; }
+            .hero-shine { animation: none; opacity: 0; }
             .marquee-track { animation: none; }
             .services-subtitle__text { transition: opacity 0.15s ease; transform: none !important; }
             .services-list h3 { transition: color 0.2s ease; transform: none !important; }
@@ -279,7 +305,10 @@
 <!-- Hero -->
 <section class="hero" id="hero">
     <h1 class="visually-hidden">WLDFR</h1>
-    <img class="hero-logo" src="assets/brand/wldfr-logo-terracotta.png" alt="WLDFR">
+    <div class="hero-logo-wrap">
+        <img class="hero-logo" src="assets/brand/wldfr-logo-terracotta.png" alt="WLDFR">
+        <span class="hero-shine" aria-hidden="true"></span>
+    </div>
 
     <a href="#clients" class="scroll-cue" id="scrollCue">
         <span class="arrow">↓</span>
@@ -289,7 +318,6 @@
 
 <!-- Clients -->
 <section class="clients" id="clients">
-    <p class="clients-eyebrow">Trusted by the names that move culture</p>
     <div class="marquee">
         <div class="marquee-track" id="clientTrack">
             <img src="assets/logos-verified/live-nation.png" alt="Live Nation">
@@ -322,7 +350,7 @@
             </aside>
         </div>
         <p class="services-subtitle" aria-live="polite">
-            <span class="services-subtitle__text">We don't chase trends. We light them.</span>
+            <span class="services-subtitle__text">&nbsp;</span>
         </p>
     </div>
 </section>
