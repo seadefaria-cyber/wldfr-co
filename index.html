@@ -89,22 +89,6 @@
             60%  { opacity: 1; }
             100% { opacity: 1; filter: blur(0); transform: scale(1); }
         }
-        .hero-shine {
-            position: absolute; inset: 0; pointer-events: none;
-            -webkit-mask: url("assets/brand/wldfr-logo-terracotta.png") center / contain no-repeat;
-                    mask: url("assets/brand/wldfr-logo-terracotta.png") center / contain no-repeat;
-            background: linear-gradient(105deg, transparent 42%, rgba(255,248,240,0.9) 50%, transparent 58%);
-            background-size: 300% 100%;
-            background-position: 165% 0;
-            opacity: 0;
-            animation: logoShine 1.5s ease-out 1.15s 1 forwards;
-        }
-        @keyframes logoShine {
-            0%   { background-position: 165% 0; opacity: 0; }
-            18%  { opacity: 1; }
-            88%  { opacity: 1; }
-            100% { background-position: -65% 0; opacity: 0; }
-        }
         @keyframes fadeIn { to { opacity: 1; } }
         .visually-hidden {
             position: absolute; width: 1px; height: 1px; overflow: hidden;
@@ -282,7 +266,6 @@
         }
         @media (prefers-reduced-motion: reduce) {
             .hero-logo { opacity: 1 !important; animation: none; filter: none !important; transform: none !important; }
-            .hero-shine { animation: none; opacity: 0; }
             .marquee-track { animation: none; }
             .services-subtitle__text { transition: opacity 0.15s ease; transform: none !important; }
             .services-list h3 { transition: color 0.2s ease; transform: none !important; }
@@ -307,7 +290,6 @@
     <h1 class="visually-hidden">WLDFR</h1>
     <div class="hero-logo-wrap">
         <img class="hero-logo" src="assets/brand/wldfr-logo-terracotta.png" alt="WLDFR">
-        <span class="hero-shine" aria-hidden="true"></span>
     </div>
 
     <a href="#clients" class="scroll-cue" id="scrollCue">
@@ -359,7 +341,7 @@
 <section class="contact" id="contact">
     <div class="contact-inner">
         <h2>let's work.</h2>
-        <form class="form" action="https://formsubmit.co/sean@wldfr.co" method="POST">
+        <form class="form" action="https://formsubmit.co/ac@wldfr.co" method="POST">
             <input type="hidden" name="_subject" value="New inquiry from wldfr.co">
             <input type="hidden" name="_captcha" value="false">
             <div class="form-field">
@@ -386,8 +368,7 @@
 <footer>
     <span>&copy; 2026 WLDFR&trade; &nbsp;·&nbsp; New York City</span>
     <span class="footer-links">
-        <a href="mailto:sean@wldfr.co" class="footer-email">sean@wldfr.co</a>
-        <a href="https://instagram.com/wldfyre" target="_blank" rel="noopener">Instagram ↗</a>
+        <a href="mailto:team@wldfr.co" class="footer-email">team@wldfr.co</a>
     </span>
 </footer>
 
